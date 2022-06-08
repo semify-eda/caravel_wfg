@@ -1,0 +1,70 @@
+{
+    "registers": {
+        "CFG": {
+            "address": "4'h4",
+            "description": "SPI configuration register",
+            "entries": {
+                "CPOL": {
+                    "LSB": "0",
+                    "MSB": "0",
+                    "access": "rw",
+                    "description": "Clock polarity\n  0: CK to 0 when idle\n  1: CK to 1 when idle",
+                    "hardware": "cfg",
+                    "reset": "1'b0"
+                },
+                "DFF": {
+                    "LSB": "2",
+                    "MSB": "3",
+                    "access": "rw",
+                    "description": "Data frame format\n  00: 8bit\n  01: 16bit\n  10: 24bit\n  11: 32bit",
+                    "hardware": "cfg",
+                    "reset": "2'b00"
+                },
+                "LSBFIRST": {
+                    "LSB": "1",
+                    "MSB": "1",
+                    "access": "rw",
+                    "description": "Frame format\n  0: MSB transmitted first\n  1: LSB transmitted first",
+                    "hardware": "cfg",
+                    "reset": "1'b0"
+                },
+                "SSPOL": {
+                    "LSB": "4",
+                    "MSB": "4",
+                    "access": "rw",
+                    "description": "Slave select polarity\n  0: Active low\n  1: Active high",
+                    "hardware": "cfg",
+                    "reset": "1'b0"
+                }
+            }
+        },
+        "CLKCFG": {
+            "address": "4'h8",
+            "description": "SPI clock configuration register",
+            "entries": {
+                "DIV": {
+                    "LSB": "0",
+                    "MSB": "7",
+                    "access": "rw",
+                    "description": "SPI Clock divider.\nDivider ratio is 2*DIV+1",
+                    "hardware": "cfg",
+                    "reset": "0"
+                }
+            }
+        },
+        "CTRL": {
+            "address": "4'h0",
+            "description": "ADC control register",
+            "entries": {
+                "EN": {
+                    "LSB": "0",
+                    "MSB": "0",
+                    "access": "rw",
+                    "description": "SPI enable",
+                    "hardware": "cfg",
+                    "reset": "1'b0"
+                }
+            }
+        }
+    }
+}

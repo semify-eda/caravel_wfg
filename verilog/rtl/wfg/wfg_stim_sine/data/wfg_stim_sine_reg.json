@@ -1,0 +1,60 @@
+{
+    "registers": {
+        "CTRL": {
+            "address": "4'h0",
+            "description": "Control register for sine wave generation unit",
+            "entries": {
+                "EN": {
+                    "LSB": "0",
+                    "MSB": "0",
+                    "access": "rw",
+                    "description": "Enables stimuli generation",
+                    "hardware": "cfg",
+                    "reset": "1'b0"
+                }
+            }
+        },
+        "GAIN": {
+            "address": "4'h8",
+            "description": "Gain register",
+            "entries": {
+                "VAL": {
+                    "LSB": "0",
+                    "MSB": "15",
+                    "access": "rw",
+                    "description": "Sine wave gain in 2f14 unsigned representation. ",
+                    "hardware": "cfg",
+                    "reset": "16'h4000"
+                }
+            }
+        },
+        "INC": {
+            "address": "4'h4",
+            "description": "Increment register",
+            "entries": {
+                "VAL": {
+                    "LSB": "0",
+                    "MSB": "15",
+                    "access": "rw",
+                    "description": "Increment for angle per sample (f=fs/2**16/INC). Counter is implemented as wrap-around counter.",
+                    "hardware": "cfg",
+                    "reset": "16'h1000"
+                }
+            }
+        },
+        "OFFSET": {
+            "address": "4'hC",
+            "description": "Offset register",
+            "entries": {
+                "VAL": {
+                    "LSB": "0",
+                    "MSB": "17",
+                    "access": "rw",
+                    "description": "Signed offset added after applying gain.",
+                    "hardware": "cfg",
+                    "reset": "18'h0000"
+                }
+            }
+        }
+    }
+}

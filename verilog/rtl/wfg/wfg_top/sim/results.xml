@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1654671525" />
+    <testcase name="top_test" classname="test_wfg_top" file="/home/leo/Nextcloud/Fachhochschule/Bachelorarbeit/waveform-generator/design/wfg_top/testbench/test_wfg_top.py" lineno="86" time="1.9310591220855713" sim_time_ns="100430.001" ratio_time="52007.729774495034" />
+  </testsuite>
+</testsuites>

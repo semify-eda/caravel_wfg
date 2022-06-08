@@ -1,0 +1,9 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1654671515" />
+    <testcase name="core_test_001" classname="test_wfg_core" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="1.9370651245117188" sim_time_ns="121610.001" ratio_time="62780.54333906536" />
+    <testcase name="core_test_002" classname="test_wfg_core" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="2.204606771469116" sim_time_ns="138170.001" ratio_time="62673.308813220065" />
+    <testcase name="core_test_003" classname="test_wfg_core" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="1.6938631534576416" sim_time_ns="105770.00100000002" ratio_time="62443.0614622523" />
+    <testcase name="core_test_004" classname="test_wfg_core" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="1.9233167171478271" sim_time_ns="120170.00099999999" ratio_time="62480.60963053734" />
+  </testsuite>
+</testsuites>

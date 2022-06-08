@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1654694431" />
+    <testcase name="my_first_test" classname="test_wfg_stim_sine" file="/home/leo/Nextcloud/Fachhochschule/Bachelorarbeit/waveform-generator/design/wfg_stim_sine/testbench/test_wfg_stim_sine.py" lineno="10" time="3.544705867767334" sim_time_ns="300490.001" ratio_time="84771.49084001896" />
+  </testsuite>
+</testsuites>
