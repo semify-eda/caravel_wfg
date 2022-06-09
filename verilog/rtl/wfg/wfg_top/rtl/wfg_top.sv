@@ -14,11 +14,11 @@ module wfg_top #(
     input                     io_wbs_clk,
     input                     io_wbs_rst,
     input        [(BUSW-1):0] io_wbs_adr,
-    input        [(BUSW-1):0] io_wbs_datrd,
-    output       [(BUSW-1):0] io_wbs_datwr,
+    input        [(BUSW-1):0] io_wbs_datwr,
+    output       [(BUSW-1):0] io_wbs_datrd,
     input                     io_wbs_we,
     input                     io_wbs_stb,
-    output wire                   io_wbs_ack,
+    output                    io_wbs_ack, // wire
     input                     io_wbs_cyc,
 
     output       wfg_drive_spi_sclk_o,

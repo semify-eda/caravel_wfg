@@ -70,9 +70,8 @@ module wb_port_wfg_tb;
 	end
 
     // Deserialize data
-    integer data;
+    integer data, i;
     always @(posedge cs) begin
-        integer i;
         for (i=31;i>=0;i--) begin
             @(posedge sclk);
             data[i] = sdo;
