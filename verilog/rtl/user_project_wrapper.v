@@ -82,7 +82,7 @@ module user_project_wrapper #(
 /* User project is instantiated  here   */
 /*--------------------------------------*/
 
-user_proj_example mprj (
+/*user_proj_example mprj (
 `ifdef USE_POWER_PINS
 	.vccd1(vccd1),	// User area 1 1.8V power
 	.vssd1(vssd1),	// User area 1 digital ground
@@ -116,6 +116,40 @@ user_proj_example mprj (
 
     // IRQ
     .irq(user_irq)
+);*/
+
+wfg_top my_wfg (
+`ifdef USE_POWER_PINS
+	.vccd1(vccd1),	// User area 1 1.8V power
+	.vssd1(vssd1),	// User area 1 digital ground
+`endif
+    
+    .io_wbs_clk(wb_clk_i),
+    .io_wbs_rst(wb_rst_i),
+    
+    // MGMT SoC Wishbone Slave
+    
+    .io_wbs_adr     (wbs_adr_i),
+    .io_wbs_datwr   (wbs_dat_i),
+    .io_wbs_datrd   (wbs_dat_o),
+    .io_wbs_we      (wbs_we_i),
+    .io_wbs_stb     (wbs_stb_i),
+    .io_wbs_ack     (wbs_ack_o),
+    .io_wbs_cyc     (wbs_cyc_i),
+
+    // Logic Analyzer
+
+    //.la_data_in(la_data_in),
+    //.la_data_out(la_data_out),
+    //.la_oenb (la_oenb),
+
+    // IO Pads
+
+    .wfg_drive_spi_sclk_o(io_out[8]),
+    .wfg_drive_spi_cs_no (io_out[9]),
+    .wfg_drive_spi_sdo_o (io_out[10]),
+    
+    .io_oeb(io_oeb[10:8])
 );
 
 endmodule	// user_project_wrapper

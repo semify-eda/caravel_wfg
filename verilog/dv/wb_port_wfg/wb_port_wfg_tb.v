@@ -27,9 +27,12 @@ module wb_port_wfg_tb;
 	wire gpio;
 	wire [37:0] mprj_io;
 	wire [7:0] mprj_io_0;
-	wire [15:0] checkbits;
+	
+	wire sclk, cs, sdo;
 
-	assign checkbits = mprj_io[31:16];
+	assign sclk = mprj_io[8];
+	assign cs   = mprj_io[9];
+	assign sdo  = mprj_io[10];
 
 	assign mprj_io[3] = 1'b1;
 
@@ -52,28 +55,71 @@ module wb_port_wfg_tb;
 		$dumpvars(0, wb_port_wfg_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (70) begin
+		repeat (200) begin
 			repeat (1000) @(posedge my_clock);
 			// $display("+1000 cycles");
 		end
 		$display("%c[1;31m",27);
 		`ifdef GL
-			$display ("Monitor: Timeout, Test Mega-Project WB Port (GL) Failed");
+			$display ("Monitor: Timeout, Test Mega-Project WB WFG (GL) Failed");
 		`else
-			$display ("Monitor: Timeout, Test Mega-Project WB Port (RTL) Failed");
+			$display ("Monitor: Timeout, Test Mega-Project WB WFG (RTL) Failed");
 		`endif
 		$display("%c[0m",27);
 		$finish;
 	end
 
+    // Deserialize data
+    integer data;
+    always @(posedge cs) begin
+        integer i;
+        for (i=31;i>=0;i--) begin
+            @(posedge sclk);
+            data[i] = sdo;
+        end
+    end
+
 	initial begin
-	   wait(checkbits == 16'hAB60);
-		$display("Monitor: MPRJ-Logic WB Started");
-		wait(checkbits == 16'hAB61);
+        @(negedge cs);
+		$display("Monitor: MPRJ-Logic WB WFG Started");
+		
+        @(posedge cs);
+        wait(data === 25094);
+        @(posedge cs);
+        wait(data === 46345);
+        @(posedge cs);
+        wait(data === 60543);
+        @(posedge cs);
+        wait(data === 65533);
+        @(posedge cs);
+        wait(data === 60539);
+        @(posedge cs);
+        wait(data === 46336);
+        @(posedge cs);
+        wait(data === 25084);
+        @(posedge cs);
+        wait(data === 10);
+        @(posedge cs);
+        wait(data === 237050);
+        @(posedge cs);
+        wait(data === 215799);
+        @(posedge cs);
+        wait(data === 201601);
+        @(posedge cs);
+        wait(data === 196611);
+        @(posedge cs);
+        wait(data === 201605);
+        @(posedge cs);
+        wait(data === 215808);
+        @(posedge cs);
+        wait(data === 237060);
+        @(posedge cs);
+        wait(data === 262134);
+
 		`ifdef GL
-	    	$display("Monitor: Mega-Project WB (GL) Passed");
+	    	$display("Monitor: Mega-Project WB WFG (GL) Passed");
 		`else
-		    $display("Monitor: Mega-Project WB (RTL) Passed");
+		    $display("Monitor: Mega-Project WB WFG (RTL) Passed");
 		`endif
 	    $finish;
 	end

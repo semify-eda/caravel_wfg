@@ -25,7 +25,7 @@
 		- Checks counter value through the wishbone port
 */
 
-void wfg_set_register(uint8_t peripheral, uint8_t address, uint32_t value);
+void wfg_set_register(uint32_t peripheral, uint32_t address, uint32_t value);
 
 void main()
 {
@@ -49,39 +49,14 @@ void main()
 
     reg_spi_enable = 1;
     reg_wb_enable = 1;
-	// reg_spimaster_config = 0xa002;	// Enable, prescaler = 2,
-                                        // connect to housekeeping SPI
 
-	// Connect the housekeeping SPI to the SPI master
-	// so that the CSB line is not left floating.  This allows
-	// all of the GPIO pins to be used for user functions.
-
-    reg_mprj_io_8  = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_9  = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_10 = GPIO_MODE_MGMT_STD_OUTPUT;
-
-    reg_mprj_io_31 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_30 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_29 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_28 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_27 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_26 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_25 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_24 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_23 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_22 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_21 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_20 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_19 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_18 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_17 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_io_16 = GPIO_MODE_MGMT_STD_OUTPUT;
+    reg_mprj_io_8  = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_9  = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_10 = GPIO_MODE_USER_STD_OUTPUT;
 
      /* Apply configuration */
     reg_mprj_xfer = 1;
     while (reg_mprj_xfer == 1);
-
-	reg_la2_oenb = reg_la2_iena = 0x00000000;    // [95:64]
 
     int sync_count = 16;
     int subcycle_count = 16;
@@ -91,6 +66,9 @@ void main()
     int lsbfirst = 0;
     int dff = 3;
     int sspol = 0;
+
+
+    //*((volatile uint32_t*)0x30000000) = 0xDEADBEEF;
 
     // Core
     wfg_set_register(0x1, 0x4, (sync_count << 0) | (subcycle_count << 8));
@@ -103,14 +81,6 @@ void main()
     wfg_set_register(0x3, 0x8, cnt); // Clock divider
     wfg_set_register(0x3, 0x4, (cpol<<0) | (lsbfirst<<1) | (dff<<2) | (sspol<<4));
     wfg_set_register(0x3, 0x0, 1); // Enable SPI
-
-    // Flag start of the test
-	reg_mprj_datal = 0xAB600000;
-
-    reg_mprj_slave = 0x00002710;
-    if (reg_mprj_slave == 0x2B3D) {
-        reg_mprj_datal = 0xAB610000;
-    }
 }
 
 volatile uint8_t test = 0;
@@ -127,11 +97,11 @@ peripheral:
 address:
 The address of the register, can be 0-15
 */
-void wfg_set_register(uint8_t peripheral, uint8_t address, uint32_t value)
+void wfg_set_register(uint32_t peripheral, uint32_t address, uint32_t value)
 {
-    *(volatile uint32_t*)(WFG_BASE + (peripheral<<4) + (address & 0xF)) = value;
+    *(volatile uint32_t*)(WFG_BASE + (peripheral<<2) + ((address & 0xF)>>2)) = value;
     
-    int readback = *(volatile uint32_t*)(WFG_BASE + (peripheral<<4) + (address & 0xF));
+    int readback = *(volatile uint32_t*)(WFG_BASE + (peripheral<<2) + ((address & 0xF)>>2));
 
     if (readback != value)
     {
