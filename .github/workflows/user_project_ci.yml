@@ -142,10 +142,10 @@ jobs:
           make user_proj_wfg
           make user_project_wrapper
 
-      - name: Run DV RTL tests
-        run: |
-          make verify-wb_port_wfg-rtl
+      #- name: Run DV RTL tests
+      #  run: |
+      #    make verify-wb_port_wfg-rtl
 
-      - name: Run DV GL tests
-        run: |
-          make verify-wb_port_wfg-gl
+      #- name: Run DV GL tests
+      #  run: |
+      #    make verify-wb_port_wfg-gl
