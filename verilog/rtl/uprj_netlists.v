@@ -24,5 +24,14 @@
     `include "gl/wfg_top.v"
 `else
     `include "user_project_wrapper.v"
-    `include TODO
+    `include "wfg/wfg_core/rtl/wfg_core.sv"
+	`include "wfg/wfg_core/rtl/wfg_core_top.sv"
+	`include "wfg/wfg_core/rtl/wfg_core_wishbone_reg.sv"
+	`include "wfg/wfg_drive_spi/rtl/wfg_drive_spi.sv"
+	`include "wfg/wfg_drive_spi/rtl/wfg_drive_spi_top.sv"
+	`include "wfg/wfg_drive_spi/rtl/wfg_drive_spi_wishbone_reg.sv"
+	`include "wfg/wfg_stim_sine/rtl/wfg_stim_sine."
+	`include "wfg/wfg_stim_sine/rtl/wfg_stim_sine_top.sv"
+	`include "wfg/wfg_stim_sine/rtl/wfg_stim_sine_wishbone_reg.sv"
+	`include "wfg/wfg_top/rtl/wfg_top.sv"
 `endif
