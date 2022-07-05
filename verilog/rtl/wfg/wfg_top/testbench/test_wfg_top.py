@@ -72,16 +72,51 @@ async def configure_core(dut, wbs, en, sync_count, subcycle_count):
     await set_register(dut, wbs, 0x1, 0x4, (sync_count << 0) | (subcycle_count << 8))
     await set_register(dut, wbs, 0x1, 0x0, en) # Enable
 
+async def configure_interconnect(dut, wbs, en=1, driver0=0, driver1=1):
+    await set_register(dut, wbs, 0x6, 0x4, driver0)
+    await set_register(dut, wbs, 0x6, 0x8, driver1)
+    await set_register(dut, wbs, 0x6, 0x0, en) # Enable
+
 async def configure_stim_sine(dut, wbs, en, inc=0x1000, gain=0x4000, offset=0):
     await set_register(dut, wbs, 0x2, 0x4, inc)
     await set_register(dut, wbs, 0x2, 0x8, gain)
     await set_register(dut, wbs, 0x2, 0xC, offset)
     await set_register(dut, wbs, 0x2, 0x0, en) # Enable
 
+async def configure_stim_mem(dut, wbs, en, start, end, inc):
+    await set_register(dut, wbs, 0x5, 0x4, start)
+    await set_register(dut, wbs, 0x5, 0x8, end)
+    await set_register(dut, wbs, 0x5, 0xC, inc)
+    await set_register(dut, wbs, 0x5, 0x0, en) # Enable
+
 async def configure_drive_spi(dut, wbs, en=1, cnt=3, cpol=0, lsbfirst=0, dff=0, sspol=0):
     await set_register(dut, wbs, 0x3, 0x8, cnt) # Clock divider
     await set_register(dut, wbs, 0x3, 0x4, (cpol<<0) | (lsbfirst<<1) | (dff<<2) | (sspol<<4))
     await set_register(dut, wbs, 0x3, 0x0, en) # Enable SPI
+
+async def configure_drive_pat(dut, wbs, en, pat, begin, end):
+    await set_register(dut, wbs, 0x4, 0x4, (begin & 0xFF) | ((end & 0xFF)<<8))
+    await set_register(dut, wbs, 0x4, 0x8, pat[0])
+    await set_register(dut, wbs, 0x4, 0xC, pat[1])
+    await set_register(dut, wbs, 0x4, 0x0, en) # Enable PAT
+
+async def checkPattern(dut, start, end, inc):
+
+    cur_address = start
+
+    while 1:
+        await FallingEdge(dut.wfg_drive_spi_cs_no)
+        await FallingEdge(dut.io_wbs_clk)
+        value = dut.wfg_drive_pat_dout_o.value
+        
+        dut._log.info(f"Test: {cur_address} == {value}")
+        
+        #assert(cur_address == value)
+        
+        cur_address += inc
+        
+        if (cur_address > end):
+            cur_address = start
 
 @cocotb.test()
 async def top_test(dut):
@@ -140,10 +175,20 @@ async def top_test(dut):
     # Setup core
     dut._log.info("Configure core")
     await configure_core(dut, wbs, en=1, sync_count=16, subcycle_count=16)
+    dut._log.info("Configure interconnect")
+    await configure_interconnect(dut, wbs, en=1, driver0=0, driver1=1)
     dut._log.info("Configure stim_sine")
     await configure_stim_sine(dut, wbs, en=1, inc=sine_inc, gain=sine_gain, offset=sine_offset)
+    dut._log.info("Configure stim_mem")
+    await configure_stim_mem(dut, wbs, en=1, start=0x0000, end=0x000F, inc=0x01)
     dut._log.info("Configure drive_spi")
     await configure_drive_spi(dut, wbs, en=1, cnt=cnt, cpol=cpol, lsbfirst=lsbfirst, dff=dff, sspol=sspol)
+    dut._log.info("Configure drive_pat")
+    pat = [0xFFFFFFFF, 0xFFFFFFFF]
+    await configure_drive_pat(dut, wbs, en=0xFFFFFFFF, pat=pat, begin=0, end=8)
+
+    # Check pattern
+    cocotb.start_soon(checkPattern(dut, start=0x0000, end=0x000F, inc=0x01))
 
     while len(spi_slave.values) < num_spi_values:
         await short_per
@@ -189,16 +234,18 @@ async def top_test(dut):
     x_data_highres = np.linspace(x_data[0], x_data[-1], num=100)
     y_calc_highres = test_func(x_data_highres, params[0], params[1], params[2])
     
-    fig, ax = plt.subplots(2, 1)
-    fig.suptitle('Sine Stimuli and SPI Driver', fontsize=16)
+
     
-    ax[0].scatter(x_data, y_data_float, label='SPI data as float')
+    fig, ax = plt.subplots(2, 1)
+    fig.suptitle('Stimulus: Sine wave generator, Driver: SPI module', fontsize=24)
+    
+    ax[0].scatter(x_data, y_data_float, label='SPI data represented as float')
     #ax[0].plot(x_data_highres, y_calc_highres, label='Fitted function')
-    ax[0].set(xlabel='time in ns', ylabel='value')
+    ax[0].set(xlabel='time in ns', ylabel='Value')
     ax[0].legend(loc='best')
     ax[0].grid()
     
-    ax[1].set(xlabel='time in ns', ylabel='value')
+    ax[1].set(xlabel='time in ns', ylabel='Error')
     ax[1].plot(x_data, y_error, label='error = y_data - y_calc')
     ax[1].legend(loc='best')
     ax[1].grid()

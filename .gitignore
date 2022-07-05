@@ -5,4 +5,4 @@ precheck_results
 *.gtkw
 *.pyc
 sim_build
-
+*.gds

@@ -1,0 +1,13 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1656933054" />
+    <testcase name="mem_test_001" classname="test_wfg_stim_mem" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.014833211898803711" sim_time_ns="640.001" ratio_time="43146.48805439202" />
+    <testcase name="mem_test_002" classname="test_wfg_stim_mem" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.012360572814941406" sim_time_ns="640.001" ratio_time="51777.616586374505" />
+    <testcase name="mem_test_003" classname="test_wfg_stim_mem" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.01406550407409668" sim_time_ns="640.001" ratio_time="45501.46206125943" />
+    <testcase name="mem_test_004" classname="test_wfg_stim_mem" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.011782646179199219" sim_time_ns="640.001" ratio_time="54317.25524694456" />
+    <testcase name="mem_test_005" classname="test_wfg_stim_mem" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.014307498931884766" sim_time_ns="640.0010000000002" ratio_time="44731.85726218965" />
+    <testcase name="mem_test_006" classname="test_wfg_stim_mem" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.01180267333984375" sim_time_ns="640.0009999999997" ratio_time="54225.087958629585" />
+    <testcase name="mem_test_007" classname="test_wfg_stim_mem" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.013865947723388672" sim_time_ns="640.0009999999997" ratio_time="46156.31132955052" />
+    <testcase name="mem_test_008" classname="test_wfg_stim_mem" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.012054920196533203" sim_time_ns="640.0010000000002" ratio_time="53090.43855670268" />
+  </testsuite>
+</testsuites>

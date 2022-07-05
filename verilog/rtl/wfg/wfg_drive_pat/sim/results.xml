@@ -1,0 +1,11 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1655755334" />
+    <testcase name="run_test_001" classname="test_wfg_drive_pat" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.03713726997375488" sim_time_ns="470.001" ratio_time="12655.776806753764">
+      <failure />
+    </testcase>
+    <testcase name="run_test_002" classname="test_wfg_drive_pat" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.033402442932128906" sim_time_ns="480.001" ratio_time="14370.23636191292">
+      <failure />
+    </testcase>
+  </testsuite>
+</testsuites>
