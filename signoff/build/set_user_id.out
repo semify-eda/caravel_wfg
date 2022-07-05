@@ -1,0 +1,9 @@
+Setting project user ID to: 0
+Step 1:  Modify layout of the user_id_programming subcell
+Done!
+Step 2:  Add user project ID parameter to source verilog.
+Done!
+Step 3:  Add user project ID parameter to gate-level verilog.
+Error:  No substitutions done on verilog/gl/user_id_programming.v.
+Ending process.
+Set user ID completed.

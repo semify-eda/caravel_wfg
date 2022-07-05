@@ -87,7 +87,27 @@ module user_project_wrapper (user_clock2,
  wire \addr1[7] ;
  wire \addr1[8] ;
  wire \addr1[9] ;
+ wire \addr_mem0[0] ;
+ wire \addr_mem0[1] ;
+ wire \addr_mem0[2] ;
+ wire \addr_mem0[3] ;
+ wire \addr_mem0[4] ;
+ wire \addr_mem0[5] ;
+ wire \addr_mem0[6] ;
+ wire \addr_mem0[7] ;
+ wire \addr_mem0[8] ;
+ wire \addr_mem1[0] ;
+ wire \addr_mem1[1] ;
+ wire \addr_mem1[2] ;
+ wire \addr_mem1[3] ;
+ wire \addr_mem1[4] ;
+ wire \addr_mem1[5] ;
+ wire \addr_mem1[6] ;
+ wire \addr_mem1[7] ;
+ wire \addr_mem1[8] ;
  wire csb1;
+ wire csb_mem0;
+ wire csb_mem1;
  wire \dout1[0] ;
  wire \dout1[10] ;
  wire \dout1[11] ;
@@ -120,7 +140,200 @@ module user_project_wrapper (user_clock2,
  wire \dout1[7] ;
  wire \dout1[8] ;
  wire \dout1[9] ;
+ wire \dout_mem0[0] ;
+ wire \dout_mem0[10] ;
+ wire \dout_mem0[11] ;
+ wire \dout_mem0[12] ;
+ wire \dout_mem0[13] ;
+ wire \dout_mem0[14] ;
+ wire \dout_mem0[15] ;
+ wire \dout_mem0[16] ;
+ wire \dout_mem0[17] ;
+ wire \dout_mem0[18] ;
+ wire \dout_mem0[19] ;
+ wire \dout_mem0[1] ;
+ wire \dout_mem0[20] ;
+ wire \dout_mem0[21] ;
+ wire \dout_mem0[22] ;
+ wire \dout_mem0[23] ;
+ wire \dout_mem0[24] ;
+ wire \dout_mem0[25] ;
+ wire \dout_mem0[26] ;
+ wire \dout_mem0[27] ;
+ wire \dout_mem0[28] ;
+ wire \dout_mem0[29] ;
+ wire \dout_mem0[2] ;
+ wire \dout_mem0[30] ;
+ wire \dout_mem0[31] ;
+ wire \dout_mem0[3] ;
+ wire \dout_mem0[4] ;
+ wire \dout_mem0[5] ;
+ wire \dout_mem0[6] ;
+ wire \dout_mem0[7] ;
+ wire \dout_mem0[8] ;
+ wire \dout_mem0[9] ;
+ wire \dout_mem1[0] ;
+ wire \dout_mem1[10] ;
+ wire \dout_mem1[11] ;
+ wire \dout_mem1[12] ;
+ wire \dout_mem1[13] ;
+ wire \dout_mem1[14] ;
+ wire \dout_mem1[15] ;
+ wire \dout_mem1[16] ;
+ wire \dout_mem1[17] ;
+ wire \dout_mem1[18] ;
+ wire \dout_mem1[19] ;
+ wire \dout_mem1[1] ;
+ wire \dout_mem1[20] ;
+ wire \dout_mem1[21] ;
+ wire \dout_mem1[22] ;
+ wire \dout_mem1[23] ;
+ wire \dout_mem1[24] ;
+ wire \dout_mem1[25] ;
+ wire \dout_mem1[26] ;
+ wire \dout_mem1[27] ;
+ wire \dout_mem1[28] ;
+ wire \dout_mem1[29] ;
+ wire \dout_mem1[2] ;
+ wire \dout_mem1[30] ;
+ wire \dout_mem1[31] ;
+ wire \dout_mem1[3] ;
+ wire \dout_mem1[4] ;
+ wire \dout_mem1[5] ;
+ wire \dout_mem1[6] ;
+ wire \dout_mem1[7] ;
+ wire \dout_mem1[8] ;
+ wire \dout_mem1[9] ;
 
+ merge_memory merge_memory_inst (.csb(csb1),
+    .csb_mem0(csb_mem0),
+    .csb_mem1(csb_mem1),
+    .vccd1(vccd1),
+    .vssd1(vssd1),
+    .addr({\addr1[9] ,
+    \addr1[8] ,
+    \addr1[7] ,
+    \addr1[6] ,
+    \addr1[5] ,
+    \addr1[4] ,
+    \addr1[3] ,
+    \addr1[2] ,
+    \addr1[1] ,
+    \addr1[0] }),
+    .addr_mem0({\addr_mem0[8] ,
+    \addr_mem0[7] ,
+    \addr_mem0[6] ,
+    \addr_mem0[5] ,
+    \addr_mem0[4] ,
+    \addr_mem0[3] ,
+    \addr_mem0[2] ,
+    \addr_mem0[1] ,
+    \addr_mem0[0] }),
+    .addr_mem1({\addr_mem1[8] ,
+    \addr_mem1[7] ,
+    \addr_mem1[6] ,
+    \addr_mem1[5] ,
+    \addr_mem1[4] ,
+    \addr_mem1[3] ,
+    \addr_mem1[2] ,
+    \addr_mem1[1] ,
+    \addr_mem1[0] }),
+    .dout({\dout1[31] ,
+    \dout1[30] ,
+    \dout1[29] ,
+    \dout1[28] ,
+    \dout1[27] ,
+    \dout1[26] ,
+    \dout1[25] ,
+    \dout1[24] ,
+    \dout1[23] ,
+    \dout1[22] ,
+    \dout1[21] ,
+    \dout1[20] ,
+    \dout1[19] ,
+    \dout1[18] ,
+    \dout1[17] ,
+    \dout1[16] ,
+    \dout1[15] ,
+    \dout1[14] ,
+    \dout1[13] ,
+    \dout1[12] ,
+    \dout1[11] ,
+    \dout1[10] ,
+    \dout1[9] ,
+    \dout1[8] ,
+    \dout1[7] ,
+    \dout1[6] ,
+    \dout1[5] ,
+    \dout1[4] ,
+    \dout1[3] ,
+    \dout1[2] ,
+    \dout1[1] ,
+    \dout1[0] }),
+    .dout_mem0({\dout_mem0[31] ,
+    \dout_mem0[30] ,
+    \dout_mem0[29] ,
+    \dout_mem0[28] ,
+    \dout_mem0[27] ,
+    \dout_mem0[26] ,
+    \dout_mem0[25] ,
+    \dout_mem0[24] ,
+    \dout_mem0[23] ,
+    \dout_mem0[22] ,
+    \dout_mem0[21] ,
+    \dout_mem0[20] ,
+    \dout_mem0[19] ,
+    \dout_mem0[18] ,
+    \dout_mem0[17] ,
+    \dout_mem0[16] ,
+    \dout_mem0[15] ,
+    \dout_mem0[14] ,
+    \dout_mem0[13] ,
+    \dout_mem0[12] ,
+    \dout_mem0[11] ,
+    \dout_mem0[10] ,
+    \dout_mem0[9] ,
+    \dout_mem0[8] ,
+    \dout_mem0[7] ,
+    \dout_mem0[6] ,
+    \dout_mem0[5] ,
+    \dout_mem0[4] ,
+    \dout_mem0[3] ,
+    \dout_mem0[2] ,
+    \dout_mem0[1] ,
+    \dout_mem0[0] }),
+    .dout_mem1({\dout_mem1[31] ,
+    \dout_mem1[30] ,
+    \dout_mem1[29] ,
+    \dout_mem1[28] ,
+    \dout_mem1[27] ,
+    \dout_mem1[26] ,
+    \dout_mem1[25] ,
+    \dout_mem1[24] ,
+    \dout_mem1[23] ,
+    \dout_mem1[22] ,
+    \dout_mem1[21] ,
+    \dout_mem1[20] ,
+    \dout_mem1[19] ,
+    \dout_mem1[18] ,
+    \dout_mem1[17] ,
+    \dout_mem1[16] ,
+    \dout_mem1[15] ,
+    \dout_mem1[14] ,
+    \dout_mem1[13] ,
+    \dout_mem1[12] ,
+    \dout_mem1[11] ,
+    \dout_mem1[10] ,
+    \dout_mem1[9] ,
+    \dout_mem1[8] ,
+    \dout_mem1[7] ,
+    \dout_mem1[6] ,
+    \dout_mem1[5] ,
+    \dout_mem1[4] ,
+    \dout_mem1[3] ,
+    \dout_mem1[2] ,
+    \dout_mem1[1] ,
+    \dout_mem1[0] }));
  wfg_top my_wfg (.csb1(csb1),
     .io_wbs_ack(wbs_ack_o),
     .io_wbs_clk(wb_clk_i),
@@ -314,7 +527,7 @@ module user_project_wrapper (user_clock2,
     io_out[13],
     io_out[12],
     io_out[11]}));
- sky130_sram_2kbyte_1rw1r_32x512_8 sky130_sram_2kbyte_1rw1r_32x512_8 (.csb1(csb1),
+ sky130_sram_2kbyte_1rw1r_32x512_8 sky130_sram_2kbyte_1rw1r_32x512_8_inst0 (.csb1(csb_mem0),
     .clk1(wb_clk_i),
     .vccd1(vccd1),
     .vssd1(vssd1),
@@ -327,15 +540,15 @@ module user_project_wrapper (user_clock2,
     _NC7,
     _NC8,
     _NC9}),
-    .addr1({\addr1[8] ,
-    \addr1[7] ,
-    \addr1[6] ,
-    \addr1[5] ,
-    \addr1[4] ,
-    \addr1[3] ,
-    \addr1[2] ,
-    \addr1[1] ,
-    \addr1[0] }),
+    .addr1({\addr_mem0[8] ,
+    \addr_mem0[7] ,
+    \addr_mem0[6] ,
+    \addr_mem0[5] ,
+    \addr_mem0[4] ,
+    \addr_mem0[3] ,
+    \addr_mem0[2] ,
+    \addr_mem0[1] ,
+    \addr_mem0[0] }),
     .din0({_NC10,
     _NC11,
     _NC12,
@@ -400,40 +613,162 @@ module user_project_wrapper (user_clock2,
     _NC71,
     _NC72,
     _NC73}),
-    .dout1({\dout1[31] ,
-    \dout1[30] ,
-    \dout1[29] ,
-    \dout1[28] ,
-    \dout1[27] ,
-    \dout1[26] ,
-    \dout1[25] ,
-    \dout1[24] ,
-    \dout1[23] ,
-    \dout1[22] ,
-    \dout1[21] ,
-    \dout1[20] ,
-    \dout1[19] ,
-    \dout1[18] ,
-    \dout1[17] ,
-    \dout1[16] ,
-    \dout1[15] ,
-    \dout1[14] ,
-    \dout1[13] ,
-    \dout1[12] ,
-    \dout1[11] ,
-    \dout1[10] ,
-    \dout1[9] ,
-    \dout1[8] ,
-    \dout1[7] ,
-    \dout1[6] ,
-    \dout1[5] ,
-    \dout1[4] ,
-    \dout1[3] ,
-    \dout1[2] ,
-    \dout1[1] ,
-    \dout1[0] }),
+    .dout1({\dout_mem0[31] ,
+    \dout_mem0[30] ,
+    \dout_mem0[29] ,
+    \dout_mem0[28] ,
+    \dout_mem0[27] ,
+    \dout_mem0[26] ,
+    \dout_mem0[25] ,
+    \dout_mem0[24] ,
+    \dout_mem0[23] ,
+    \dout_mem0[22] ,
+    \dout_mem0[21] ,
+    \dout_mem0[20] ,
+    \dout_mem0[19] ,
+    \dout_mem0[18] ,
+    \dout_mem0[17] ,
+    \dout_mem0[16] ,
+    \dout_mem0[15] ,
+    \dout_mem0[14] ,
+    \dout_mem0[13] ,
+    \dout_mem0[12] ,
+    \dout_mem0[11] ,
+    \dout_mem0[10] ,
+    \dout_mem0[9] ,
+    \dout_mem0[8] ,
+    \dout_mem0[7] ,
+    \dout_mem0[6] ,
+    \dout_mem0[5] ,
+    \dout_mem0[4] ,
+    \dout_mem0[3] ,
+    \dout_mem0[2] ,
+    \dout_mem0[1] ,
+    \dout_mem0[0] }),
     .wmask0({_NC74,
     _NC75,
     _NC76,
     _NC77}));
+ sky130_sram_2kbyte_1rw1r_32x512_8 sky130_sram_2kbyte_1rw1r_32x512_8_inst1 (.csb1(csb_mem1),
+    .clk1(wb_clk_i),
+    .vccd1(vccd1),
+    .vssd1(vssd1),
+    .addr0({_NC78,
+    _NC79,
+    _NC80,
+    _NC81,
+    _NC82,
+    _NC83,
+    _NC84,
+    _NC85,
+    _NC86}),
+    .addr1({\addr_mem1[8] ,
+    \addr_mem1[7] ,
+    \addr_mem1[6] ,
+    \addr_mem1[5] ,
+    \addr_mem1[4] ,
+    \addr_mem1[3] ,
+    \addr_mem1[2] ,
+    \addr_mem1[1] ,
+    \addr_mem1[0] }),
+    .din0({_NC87,
+    _NC88,
+    _NC89,
+    _NC90,
+    _NC91,
+    _NC92,
+    _NC93,
+    _NC94,
+    _NC95,
+    _NC96,
+    _NC97,
+    _NC98,
+    _NC99,
+    _NC100,
+    _NC101,
+    _NC102,
+    _NC103,
+    _NC104,
+    _NC105,
+    _NC106,
+    _NC107,
+    _NC108,
+    _NC109,
+    _NC110,
+    _NC111,
+    _NC112,
+    _NC113,
+    _NC114,
+    _NC115,
+    _NC116,
+    _NC117,
+    _NC118}),
+    .dout0({_NC119,
+    _NC120,
+    _NC121,
+    _NC122,
+    _NC123,
+    _NC124,
+    _NC125,
+    _NC126,
+    _NC127,
+    _NC128,
+    _NC129,
+    _NC130,
+    _NC131,
+    _NC132,
+    _NC133,
+    _NC134,
+    _NC135,
+    _NC136,
+    _NC137,
+    _NC138,
+    _NC139,
+    _NC140,
+    _NC141,
+    _NC142,
+    _NC143,
+    _NC144,
+    _NC145,
+    _NC146,
+    _NC147,
+    _NC148,
+    _NC149,
+    _NC150}),
+    .dout1({\dout_mem1[31] ,
+    \dout_mem1[30] ,
+    \dout_mem1[29] ,
+    \dout_mem1[28] ,
+    \dout_mem1[27] ,
+    \dout_mem1[26] ,
+    \dout_mem1[25] ,
+    \dout_mem1[24] ,
+    \dout_mem1[23] ,
+    \dout_mem1[22] ,
+    \dout_mem1[21] ,
+    \dout_mem1[20] ,
+    \dout_mem1[19] ,
+    \dout_mem1[18] ,
+    \dout_mem1[17] ,
+    \dout_mem1[16] ,
+    \dout_mem1[15] ,
+    \dout_mem1[14] ,
+    \dout_mem1[13] ,
+    \dout_mem1[12] ,
+    \dout_mem1[11] ,
+    \dout_mem1[10] ,
+    \dout_mem1[9] ,
+    \dout_mem1[8] ,
+    \dout_mem1[7] ,
+    \dout_mem1[6] ,
+    \dout_mem1[5] ,
+    \dout_mem1[4] ,
+    \dout_mem1[3] ,
+    \dout_mem1[2] ,
+    \dout_mem1[1] ,
+    \dout_mem1[0] }),
+    .wmask0({_NC151,
+    _NC152,
+    _NC153,
+    _NC154}));
 endmodule

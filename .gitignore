@@ -9,3 +9,5 @@
 *.pyc
 sim_build
 *.gds
+caravel/
+mgmt_core_wrapper/
