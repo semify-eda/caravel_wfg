@@ -4,8 +4,48 @@
 
 # Waveform Generator
 
-TODO Documentation for the Waveform Generator
-
 The source files for the Waveform Generator can be found under the [waveform-generator](https://github.com/semify-eda/waveform-generator) repository.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eget nisi a ex condimentum ullamcorper. Suspendisse id leo vitae lorem volutpat tempor. Nulla a tellus eget turpis pretium cursus. Mauris commodo, orci ac vulputate feugiat, purus libero accumsan lacus, ac fermentum erat purus quis lorem. Donec tincidunt mauris eget eros scelerisque lobortis. Ut pretium ultrices semper. Aenean bibendum quis urna id lobortis. Cras vel mi in quam fermentum porttitor at a nulla. Suspendisse cursus turpis ante, quis tristique leo elementum ac. Aenean ac odio mauris. Curabitur suscipit enim eu elementum faucibus. Fusce volutpat odio tellus, ac interdum erat elementum quis. Nullam vel iaculis tortor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec auctor sit amet erat et porttitor. 
+The general idea is that various stimuli can be arbitrarily connected to different driver.
+
+![WFG block diagram](img/WFG.svg)
+
+Currently the following blocks are implemented:
+
+### Stimuli
+
+- `wfg_stim_sine`
+- `wfg_stim_mem`
+
+### Driver
+
+- `wfg_drive_spi`
+- `wfg_drive_pat`
+
+### Various
+
+- `wfg_interconnect`
+- `wfg_core`
+
+## Memory Map
+
+The base address of the user project is `0x30000000`.
+
+By adding an offset to this base address, the various peripherals can be configured.
+
+### wfg_stim_sine
+
+| Offset | Name | Description |
+|--------|------|-------------|
+|        |      |             |
+|        |      |             |
+
+### wfg_stim_mem
+
+### wfg_drive_spi
+
+### wfg_drive_pat
+
+### wfg_interconnect
+
+### wfg_core

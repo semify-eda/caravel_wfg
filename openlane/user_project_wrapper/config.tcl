@@ -47,7 +47,7 @@ set ::env(CLOCK_PERIOD) "20"
 ### Macro PDN Connections
 set ::env(FP_PDN_MACRO_HOOKS) "\
 	my_wfg vccd1 vssd1 \
-	merge_memory vccd1 vssd1 \
+	merge_memory_inst vccd1 vssd1 \
 	sky130_sram_2kbyte_1rw1r_32x512_8_inst0 vccd1 vssd1 \
 	sky130_sram_2kbyte_1rw1r_32x512_8_inst1 vccd1 vssd1"
 
