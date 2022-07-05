@@ -50,9 +50,20 @@ void main()
     reg_spi_enable = 1;
     reg_wb_enable = 1;
 
+    // SPI
     reg_mprj_io_8  = GPIO_MODE_USER_STD_OUTPUT;
     reg_mprj_io_9  = GPIO_MODE_USER_STD_OUTPUT;
     reg_mprj_io_10 = GPIO_MODE_USER_STD_OUTPUT;
+    
+    // Pattern
+    reg_mprj_io_11 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_12 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_13 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_14 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_15 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_16 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_17 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_18 = GPIO_MODE_USER_STD_OUTPUT;
 
      /* Apply configuration */
     reg_mprj_xfer = 1;
@@ -74,13 +85,30 @@ void main()
     wfg_set_register(0x1, 0x4, (sync_count << 0) | (subcycle_count << 8));
     wfg_set_register(0x1, 0x0, 1); // Enable
     
-    // Sine
+    // Interconnect
+    wfg_set_register(0x2, 0x4, 0); // Driver0
+    wfg_set_register(0x2, 0x8, 1); // Driver1
     wfg_set_register(0x2, 0x0, 1); // Enable
+    
+    // Sine
+    wfg_set_register(0x3, 0x0, 1); // Enable
+    
+    // Mem
+    wfg_set_register(0x4, 0x4, 0x4); // Start
+    wfg_set_register(0x4, 0x8, 0xF); // End
+    wfg_set_register(0x4, 0xC, 0x2); // Increment
+    wfg_set_register(0x4, 0x0, 1); // Enable
 
     // SPI
-    wfg_set_register(0x3, 0x8, cnt); // Clock divider
-    wfg_set_register(0x3, 0x4, (cpol<<0) | (lsbfirst<<1) | (dff<<2) | (sspol<<4));
-    wfg_set_register(0x3, 0x0, 1); // Enable SPI
+    wfg_set_register(0x5, 0x8, cnt); // Clock divider
+    wfg_set_register(0x5, 0x4, (cpol<<0) | (lsbfirst<<1) | (dff<<2) | (sspol<<4));
+    wfg_set_register(0x5, 0x0, 1); // Enable SPI
+    
+    // Pattern
+    wfg_set_register(0x6, 0x4, (0) | (8<<8) ); // Start:End
+    wfg_set_register(0x6, 0x8, 0xFFFFFFFF); // Low bit
+    wfg_set_register(0x6, 0xC, 0xFFFFFFFF); // High bit
+    wfg_set_register(0x6, 0x0, 0xFFFFFFFF); // Enable all bits
 }
 
 volatile uint8_t test = 0;
