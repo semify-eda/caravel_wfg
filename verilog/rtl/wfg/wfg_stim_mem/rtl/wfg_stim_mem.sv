@@ -20,7 +20,7 @@ module wfg_stim_mem (
     output       [ 9:0] addr1,
     input  logic [31:0] dout1
 );
-    reg [15:0] cur_address;
+    logic [15:0] cur_address;
     logic [31:0] data;
     logic valid;
 

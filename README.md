@@ -35,52 +35,53 @@ By adding an offset to this base address, the various peripherals can be configu
 
 For the register entries please refer to the [waveform-generator](https://github.com/semify-eda/waveform-generator) repository.
 
-### wfg_stim_sine
+### wfg_core
 
 | Offset | Name   | Description                                    |
 |--------|--------|------------------------------------------------|
-| 0x00   | CTRL   | Control register for sine wave generation unit |
-| 0x04   | INC    | Increment register                             |
-| 0x08   | GAIN   | Gain register                                  |
-| 0x0C   | OFFSET | Offset register                                |
-
-### wfg_stim_mem
-
-| Offset | Name   | Description                                    |
-|--------|--------|------------------------------------------------|
-| 0x00   | CTRL   | Control register for memory unit               |
-| 0x04   | START  | Start register                                 |
-| 0x08   | END    | End register                                   |
-| 0x0C   | INC    | Increment register                             |
-
-### wfg_drive_spi
-
-| Offset | Name   | Description                                    |
-|--------|--------|------------------------------------------------|
-| 0x00   | CTRL   | Control register for SPI unit                  |
-| 0x04   | CFG    | SPI configuration register                     |
-| 0x08   | CLKCFG | SPI clock configuration register               |
-
-### wfg_drive_pat
-
-| Offset | Name   | Description                                    |
-|--------|--------|------------------------------------------------|
-| 0x00   | CTRL   | Control register for pattern unit              |
-| 0x04   | CFG    | Pattern configuration register                 |
-| 0x08   | PATSEL0| Low bits of PATSEL                             |
-| 0x0C   | PATSEL1| High bits of PATSEL                            |
+| 0x10   | CTRL   | Core control register                          |
+| 0x14   | CFG    | Core configuration register                    |
 
 ### wfg_interconnect
 
 | Offset | Name   | Description                                    |
 |--------|--------|------------------------------------------------|
-| 0x00   | CTRL   | Control register for interconnect              |
-| 0x04   | DRIVER0| Driver configuration register                  |
-| 0x08   | DRIVER1| Driver configuration register                  |
+| 0x20   | CTRL   | Control register for interconnect              |
+| 0x24   | DRIVER0| Driver configuration register                  |
+| 0x28   | DRIVER1| Driver configuration register                  |
 
-### wfg_core
+### wfg_stim_sine
 
 | Offset | Name   | Description                                    |
 |--------|--------|------------------------------------------------|
-| 0x00   | CTRL   | Core control register                          |
-| 0x04   | CFG    | Core configuration register                    |
+| 0x30   | CTRL   | Control register for sine wave generation unit |
+| 0x34   | INC    | Increment register                             |
+| 0x38   | GAIN   | Gain register                                  |
+| 0x3C   | OFFSET | Offset register                                |
+
+### wfg_stim_mem
+
+| Offset | Name   | Description                                    |
+|--------|--------|------------------------------------------------|
+| 0x40   | CTRL   | Control register for memory unit               |
+| 0x44   | START  | Start register                                 |
+| 0x48   | END    | End register                                   |
+| 0x4C   | INC    | Increment register                             |
+
+### wfg_drive_spi
+
+| Offset | Name   | Description                                    |
+|--------|--------|------------------------------------------------|
+| 0x50   | CTRL   | Control register for SPI unit                  |
+| 0x54   | CFG    | SPI configuration register                     |
+| 0x58   | CLKCFG | SPI clock configuration register               |
+
+### wfg_drive_pat
+
+| Offset | Name   | Description                                    |
+|--------|--------|------------------------------------------------|
+| 0x60   | CTRL   | Control register for pattern unit              |
+| 0x64   | CFG    | Pattern configuration register                 |
+| 0x68   | PATSEL0| Low bits of PATSEL                             |
+| 0x6C   | PATSEL1| High bits of PATSEL                            |
+
