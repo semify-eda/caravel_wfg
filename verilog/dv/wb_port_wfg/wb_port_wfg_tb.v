@@ -68,6 +68,11 @@ module wb_port_wfg_tb;
 		$display("%c[0m",27);
 		$finish;
 	end
+	
+    initial begin
+        $readmemh("memory.hex", uut.mprj.sky130_sram_2kbyte_1rw1r_32x512_8_inst0.mem);
+        $readmemh("memory.hex", uut.mprj.sky130_sram_2kbyte_1rw1r_32x512_8_inst1.mem);
+    end
 
     // Deserialize data
     integer data, i;

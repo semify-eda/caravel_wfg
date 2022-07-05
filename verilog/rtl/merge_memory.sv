@@ -11,16 +11,16 @@ module merge_memory (
     // Memory interface
     input         csb,
     input  [ 9:0] addr,
-    output [31:0] dout,
+    output logic [31:0] dout,
     
     // Memory 0
-    output        csb_mem0,
-    output [ 8:0] addr_mem0,
+    output logic       csb_mem0,
+    output logic [ 8:0] addr_mem0,
     input  [31:0] dout_mem0,
     
     // Memory 1
-    output        csb_mem1,
-    output [ 8:0] addr_mem1,
+    output logic        csb_mem1,
+    output logic [ 8:0] addr_mem1,
     input  [31:0] dout_mem1
 );
 

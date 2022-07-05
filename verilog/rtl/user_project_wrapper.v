@@ -121,6 +121,7 @@ module user_project_wrapper #(
 wire csb1;
 wire [9:0 ] addr1;
 wire [31:0] dout1;
+wire [23:0] unused;
 
 wfg_top my_wfg (
 `ifdef USE_POWER_PINS
@@ -147,7 +148,7 @@ wfg_top my_wfg (
     .wfg_drive_spi_cs_no (io_out[9]),
     .wfg_drive_spi_sdo_o (io_out[10]),
     
-    .wfg_drive_pat_dout_o(io_out[18:11]),
+    .wfg_drive_pat_dout_o({unused, io_out[18:11]}),
     
     .io_oeb(io_oeb[18:8]),
     
