@@ -21,11 +21,18 @@ module wfg_top #(
     output                    io_wbs_ack,
     input                     io_wbs_cyc,
 
-    output       wfg_drive_spi_sclk_o,
-    output       wfg_drive_spi_cs_no,
-    output       wfg_drive_spi_sdo_o,
+    output wfg_drive_spi_sclk_o,
+    output wfg_drive_spi_cs_no,
+    output wfg_drive_spi_sdo_o,
+
+    output [31:0] wfg_drive_pat_dout_o,
+
+    // Memory interface
+    output              csb1,
+    output       [ 9:0] addr1,
+    input        [31:0] dout1,
     
-    output [2:0] io_oeb
+    output [10:0] io_oeb
 );
 
 endmodule

@@ -8,4 +8,4 @@
 *.gtkw
 *.pyc
 sim_build
-
+*.gds

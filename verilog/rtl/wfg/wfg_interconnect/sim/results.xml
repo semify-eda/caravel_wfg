@@ -1,0 +1,9 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1656925222" />
+    <testcase name="test_interconnect_001" classname="test_wfg_interconnect" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.06869912147521973" sim_time_ns="2410.001" ratio_time="35080.52138438634" />
+    <testcase name="test_interconnect_002" classname="test_wfg_interconnect" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.07047486305236816" sim_time_ns="2410.001" ratio_time="34196.60423049261" />
+    <testcase name="test_interconnect_003" classname="test_wfg_interconnect" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.06873583793640137" sim_time_ns="2410.0009999999993" ratio_time="35061.782504635805" />
+    <testcase name="test_interconnect_004" classname="test_wfg_interconnect" file="/home/leo/.local/lib/python3.10/site-packages/cocotb/regression.py" lineno="621" time="0.07692909240722656" sim_time_ns="2410.001000000001" ratio_time="31327.563144025997" />
+  </testsuite>
+</testsuites>
