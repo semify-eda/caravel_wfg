@@ -25,6 +25,8 @@
 `else
     `include "user_project_wrapper.v"
     `include "merge_memory.sv"
+    `include "wb_memory.sv"
+    `include "wb_mux.sv"
     `include "wfg/wfg_core/rtl/wfg_core.sv"
 	`include "wfg/wfg_core/rtl/wfg_core_top.sv"
 	`include "wfg/wfg_core/rtl/wfg_core_wishbone_reg.sv"
@@ -35,6 +37,7 @@
 	`include "wfg/wfg_stim_sine/rtl/wfg_stim_sine_top.sv"
 	`include "wfg/wfg_stim_sine/rtl/wfg_stim_sine_wishbone_reg.sv"
 	`include "wfg/wfg_stim_mem/rtl/wfg_stim_mem.sv"
+	`include "wfg/wfg_stim_mem/rtl/dsp_scale_sn_us.sv"
 	`include "wfg/wfg_stim_mem/rtl/wfg_stim_mem_top.sv"
 	`include "wfg/wfg_stim_mem/rtl/wfg_stim_mem_wishbone_reg.sv"
 	`include "wfg/wfg_drive_spi/rtl/wfg_drive_spi.sv"

@@ -82,41 +82,62 @@ module user_project_wrapper #(
 /* User project is instantiated  here   */
 /*--------------------------------------*/
 
-/*user_proj_example mprj (
+// WB Peripheral 0
+wire  [31:0] io_wbs_adr_0;
+wire  [31:0] io_wbs_datwr_0;
+wire  [31:0] io_wbs_datrd_0;
+wire         io_wbs_we_0;
+wire         io_wbs_stb_0;
+wire         io_wbs_ack_0;
+wire         io_wbs_cyc_0;
+
+// WB Peripheral 1
+wire  [31:0] io_wbs_adr_1;
+wire  [31:0] io_wbs_datwr_1;
+wire  [31:0] io_wbs_datrd_1;
+wire         io_wbs_we_1;
+wire         io_wbs_stb_1;
+wire         io_wbs_ack_1;
+wire         io_wbs_cyc_1;
+
+assign io_wbs_datrd_1 = 0;
+assign io_wbs_ack_1 = 0;
+
+wb_mux wb_mux_inst (
 `ifdef USE_POWER_PINS
 	.vccd1(vccd1),	// User area 1 1.8V power
 	.vssd1(vssd1),	// User area 1 digital ground
 `endif
 
-    .wb_clk_i(wb_clk_i),
-    .wb_rst_i(wb_rst_i),
+    // WB Master
+    .io_wbs_adr     (wbs_adr_i),
+    .io_wbs_datwr   (wbs_dat_i),
+    .io_wbs_datrd   (wbs_dat_o),
+    .io_wbs_we      (wbs_we_i),
+    .io_wbs_stb     (wbs_stb_i),
+    .io_wbs_ack     (wbs_ack_o),
+    .io_wbs_cyc     (wbs_cyc_i),
+    
+    // WB Peripheral 0
+    .io_wbs_adr_0   (io_wbs_adr_0),
+    .io_wbs_datwr_0 (io_wbs_datwr_0),
+    .io_wbs_datrd_0 (io_wbs_datrd_0),
+    .io_wbs_we_0    (io_wbs_we_0),
+    .io_wbs_stb_0   (io_wbs_stb_0),
+    .io_wbs_ack_0   (io_wbs_ack_0),
+    .io_wbs_cyc_0   (io_wbs_cyc_0),
+    
+    
+    // WB Peripheral 1
+    .io_wbs_adr_1   (io_wbs_adr_1),
+    .io_wbs_datwr_1 (io_wbs_datwr_1),
+    .io_wbs_datrd_1 (io_wbs_datrd_1),
+    .io_wbs_we_1    (io_wbs_we_1),
+    .io_wbs_stb_1   (io_wbs_stb_1),
+    .io_wbs_ack_1   (io_wbs_ack_1),
+    .io_wbs_cyc_1   (io_wbs_cyc_1)
+);
 
-    // MGMT SoC Wishbone Slave
-
-    .wbs_cyc_i(wbs_cyc_i),
-    .wbs_stb_i(wbs_stb_i),
-    .wbs_we_i(wbs_we_i),
-    .wbs_sel_i(wbs_sel_i),
-    .wbs_adr_i(wbs_adr_i),
-    .wbs_dat_i(wbs_dat_i),
-    .wbs_ack_o(wbs_ack_o),
-    .wbs_dat_o(wbs_dat_o),
-
-    // Logic Analyzer
-
-    .la_data_in(la_data_in),
-    .la_data_out(la_data_out),
-    .la_oenb (la_oenb),
-
-    // IO Pads
-
-    .io_in (io_in),
-    .io_out(io_out),
-    .io_oeb(io_oeb),
-
-    // IRQ
-    .irq(user_irq)
-);*/
 
 wire csb1;
 wire [9:0 ] addr1;
@@ -134,13 +155,13 @@ wfg_top my_wfg (
     
     // MGMT SoC Wishbone Slave
     
-    .io_wbs_adr     (wbs_adr_i),
-    .io_wbs_datwr   (wbs_dat_i),
-    .io_wbs_datrd   (wbs_dat_o),
-    .io_wbs_we      (wbs_we_i),
-    .io_wbs_stb     (wbs_stb_i),
-    .io_wbs_ack     (wbs_ack_o),
-    .io_wbs_cyc     (wbs_cyc_i),
+    .io_wbs_adr     (io_wbs_adr_0),
+    .io_wbs_datwr   (io_wbs_datwr_0),
+    .io_wbs_datrd   (io_wbs_datrd_0),
+    .io_wbs_we      (io_wbs_we_0),
+    .io_wbs_stb     (io_wbs_stb_0),
+    .io_wbs_ack     (io_wbs_ack_0),
+    .io_wbs_cyc     (io_wbs_cyc_0),
 
     // IO Pads
 

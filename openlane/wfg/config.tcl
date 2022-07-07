@@ -32,6 +32,7 @@ set ::env(VERILOG_FILES) "\
 	$script_dir/../../verilog/rtl/wfg/wfg_stim_sine/rtl/wfg_stim_sine_top.sv \
 	$script_dir/../../verilog/rtl/wfg/wfg_stim_sine/rtl/wfg_stim_sine_wishbone_reg.sv \
 	$script_dir/../../verilog/rtl/wfg/wfg_stim_mem/rtl/wfg_stim_mem.sv \
+	$script_dir/../../verilog/rtl/wfg/wfg_stim_mem/rtl/dsp_scale_sn_us.sv \
 	$script_dir/../../verilog/rtl/wfg/wfg_stim_mem/rtl/wfg_stim_mem_top.sv \
 	$script_dir/../../verilog/rtl/wfg/wfg_stim_mem/rtl/wfg_stim_mem_wishbone_reg.sv \
 	$script_dir/../../verilog/rtl/wfg/wfg_drive_spi/rtl/wfg_drive_spi.sv \
@@ -49,12 +50,12 @@ set ::env(CLOCK_PORT) "io_wbs_clk"
 set ::env(CLOCK_PERIOD) "20"
 
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 600 350"
+set ::env(DIE_AREA) "0 0 750 550"
 
 set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 
 set ::env(PL_BASIC_PLACEMENT) 0
-set ::env(PL_TARGET_DENSITY) 0.4
+set ::env(PL_TARGET_DENSITY) 0.30
 
 # Maximum layer used for routing is metal 4.
 # This is because this macro will be inserted in a top level (user_project_wrapper) 
