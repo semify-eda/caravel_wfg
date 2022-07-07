@@ -1,6 +1,8 @@
 # Caravel user project includes
 -v $(USER_PROJECT_VERILOG)/rtl/user_project_wrapper.v
 -v $(USER_PROJECT_VERILOG)/rtl/merge_memory.sv
+-v $(USER_PROJECT_VERILOG)/rtl/wb_memory.sv
+-v $(USER_PROJECT_VERILOG)/rtl/wb_mux.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_core/rtl/wfg_core.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_core/rtl/wfg_core_top.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_core/rtl/wfg_core_wishbone_reg.sv
@@ -9,6 +11,7 @@
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_interconnect/rtl/wfg_interconnect_wishbone_reg.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_stim_sine/rtl/wfg_stim_sine.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_stim_mem/rtl/wfg_stim_mem.sv
+-v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_stim_mem/rtl/dsp_scale_sn_us.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_stim_mem/rtl/wfg_stim_mem_top.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_stim_mem/rtl/wfg_stim_mem_wishbone_reg.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_stim_sine/rtl/wfg_stim_sine_top.sv
