@@ -15,13 +15,14 @@ module wb_memory (
     input  [31:0] io_wbs_datwr,
     output logic [31:0] io_wbs_datrd,
     input         io_wbs_we,
+    input  [ 3:0] io_wbs_sel,
     input         io_wbs_stb,
     output logic  io_wbs_ack,
     input         io_wbs_cyc,
     
     // Memory 0
     output        csb_mem0,
-    output logic       web_mem0,
+    output logic  web_mem0,
     output [ 3:0] wmask_mem0,
     output [ 8:0] addr_mem0,
     output [31:0] din_mem0,
@@ -29,7 +30,7 @@ module wb_memory (
     
     // Memory 1
     output        csb_mem1,
-    output logic       web_mem1,
+    output logic  web_mem1,
     output [ 3:0] wmask_mem1,
     output [ 8:0] addr_mem1,
     output [31:0] din_mem1,
@@ -59,8 +60,8 @@ module wb_memory (
     assign csb_mem0 = 1'b0;
     assign csb_mem1 = 1'b0;
     
-    assign wmask_mem0 = 4'b1111;
-    assign wmask_mem1 = 4'b1111;
+    assign wmask_mem0 = io_wbs_sel;
+    assign wmask_mem1 = io_wbs_sel;
     
     assign din_mem0 = io_wbs_datwr;
     assign din_mem1 = io_wbs_datwr;

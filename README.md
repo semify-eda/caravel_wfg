@@ -66,7 +66,7 @@ For the register entries please refer to the [waveform-generator](https://github
 | 0x40   | CTRL   | Control register for memory unit               |
 | 0x44   | START  | Start register                                 |
 | 0x48   | END    | End register                                   |
-| 0x4C   | INC    | Increment register                             |
+| 0x4C   | CFG    | Configuration register                         |
 
 ### wfg_drive_spi
 

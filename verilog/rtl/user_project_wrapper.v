@@ -96,6 +96,7 @@ wire  [31:0] io_wbs_adr_1;
 wire  [31:0] io_wbs_datwr_1;
 wire  [31:0] io_wbs_datrd_1;
 wire         io_wbs_we_1;
+wire  [ 3:0] io_wbs_sel_1;
 wire         io_wbs_stb_1;
 wire         io_wbs_ack_1;
 wire         io_wbs_cyc_1;
@@ -111,6 +112,7 @@ wb_mux wb_mux_inst (
     .io_wbs_datwr   (wbs_dat_i),
     .io_wbs_datrd   (wbs_dat_o),
     .io_wbs_we      (wbs_we_i),
+    .io_wbs_sel     (wbs_sel_i),
     .io_wbs_stb     (wbs_stb_i),
     .io_wbs_ack     (wbs_ack_o),
     .io_wbs_cyc     (wbs_cyc_i),
@@ -120,6 +122,7 @@ wb_mux wb_mux_inst (
     .io_wbs_datwr_0 (io_wbs_datwr_0),
     .io_wbs_datrd_0 (io_wbs_datrd_0),
     .io_wbs_we_0    (io_wbs_we_0),
+    .io_wbs_sel_0   (),
     .io_wbs_stb_0   (io_wbs_stb_0),
     .io_wbs_ack_0   (io_wbs_ack_0),
     .io_wbs_cyc_0   (io_wbs_cyc_0),
@@ -130,6 +133,7 @@ wb_mux wb_mux_inst (
     .io_wbs_datwr_1 (io_wbs_datwr_1),
     .io_wbs_datrd_1 (io_wbs_datrd_1),
     .io_wbs_we_1    (io_wbs_we_1),
+    .io_wbs_sel_1   (io_wbs_sel_1),
     .io_wbs_stb_1   (io_wbs_stb_1),
     .io_wbs_ack_1   (io_wbs_ack_1),
     .io_wbs_cyc_1   (io_wbs_cyc_1)
@@ -207,6 +211,7 @@ wb_memory wb_memory_inst (
     .io_wbs_datwr   (io_wbs_datwr_1),
     .io_wbs_datrd   (io_wbs_datrd_1),
     .io_wbs_we      (io_wbs_we_1),
+    .io_wbs_sel     (io_wbs_sel_1),
     .io_wbs_stb     (io_wbs_stb_1),
     .io_wbs_ack     (io_wbs_ack_1),
     .io_wbs_cyc     (io_wbs_cyc_1),
