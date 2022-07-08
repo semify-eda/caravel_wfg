@@ -55,7 +55,7 @@ module wb_port_wfg_tb;
 		$dumpvars(0, wb_port_wfg_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (200) begin
+		repeat (300) begin
 			repeat (1000) @(posedge my_clock);
 			// $display("+1000 cycles");
 		end

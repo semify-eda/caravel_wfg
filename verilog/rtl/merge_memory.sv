@@ -23,26 +23,19 @@ module merge_memory (
     output logic [ 8:0] addr_mem1,
     input  [31:0] dout_mem1
 );
+    assign csb_mem0 = csb;
+    assign csb_mem1 = csb;
+    
+    assign addr_mem0 = addr[8:0];
+    assign addr_mem1 = addr[8:0];
 
     always_comb begin
         if (addr[9] == 0) begin
-            csb_mem0    = csb;
-            addr_mem0   = addr;
-            dout        = dout_mem0;
-            
-            csb_mem1    = '0;
-            addr_mem1   = '0;
+            dout = dout_mem0;
         end else begin
-            csb_mem1    = csb;
-            addr_mem1   = addr;
-            dout        = dout_mem1;
-            
-            csb_mem0    = '0;
-            addr_mem0   = '0;
+            dout = dout_mem1;
         end
     end
-
-
 
 endmodule
 `default_nettype wire

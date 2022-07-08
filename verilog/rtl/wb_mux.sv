@@ -16,10 +16,10 @@ module wb_mux #(
     // WB Master
     input   [31:0] io_wbs_adr,
     input   [31:0] io_wbs_datwr,
-    output  [31:0] io_wbs_datrd,
+    output logic [31:0] io_wbs_datrd,
     input          io_wbs_we,
     input          io_wbs_stb,
-    output         io_wbs_ack,
+    output logic        io_wbs_ack,
     input          io_wbs_cyc,
     
     // WB Peripheral 0

@@ -100,9 +100,6 @@ wire         io_wbs_stb_1;
 wire         io_wbs_ack_1;
 wire         io_wbs_cyc_1;
 
-assign io_wbs_datrd_1 = 0;
-assign io_wbs_ack_1 = 0;
-
 wb_mux wb_mux_inst (
 `ifdef USE_POWER_PINS
 	.vccd1(vccd1),	// User area 1 1.8V power
@@ -144,7 +141,7 @@ wire [9:0 ] addr1;
 wire [31:0] dout1;
 wire [23:0] unused;
 
-wfg_top my_wfg (
+wfg_top wfg_top_inst (
 `ifdef USE_POWER_PINS
 	.vccd1(vccd1),	// User area 1 1.8V power
 	.vssd1(vssd1),	// User area 1 digital ground
@@ -153,7 +150,7 @@ wfg_top my_wfg (
     .io_wbs_clk(wb_clk_i),
     .io_wbs_rst(wb_rst_i),
     
-    // MGMT SoC Wishbone Slave
+    // Wishbone
     
     .io_wbs_adr     (io_wbs_adr_0),
     .io_wbs_datwr   (io_wbs_datwr_0),
@@ -180,13 +177,64 @@ wfg_top my_wfg (
     .dout1  (dout1)
 );
 
-wire        csb_mem0;
-wire [ 8:0] addr_mem0;
-wire [31:0] dout_mem0;
 
-wire        csb_mem1;
-wire [ 8:0] addr_mem1;
-wire [31:0] dout_mem1;
+wire        csb0_mem0;
+wire        web0_mem0;
+wire [ 3:0] wmask0_mem0;
+wire [ 8:0] addr0_mem0;
+wire [31:0] din0_mem0;
+wire [31:0] dout0_mem0;
+
+wire        csb0_mem1;
+wire        web0_mem1;
+wire [ 3:0] wmask0_mem1;
+wire [ 8:0] addr0_mem1;
+wire [31:0] din0_mem1;
+wire [31:0] dout0_mem1;
+
+wb_memory wb_memory_inst (
+`ifdef USE_POWER_PINS
+	.vccd1(vccd1),	// User area 1 1.8V power
+	.vssd1(vssd1),	// User area 1 digital ground
+`endif
+    
+    .io_wbs_clk(wb_clk_i),
+    .io_wbs_rst(wb_rst_i),
+    
+    // Wishbone
+    
+    .io_wbs_adr     (io_wbs_adr_1),
+    .io_wbs_datwr   (io_wbs_datwr_1),
+    .io_wbs_datrd   (io_wbs_datrd_1),
+    .io_wbs_we      (io_wbs_we_1),
+    .io_wbs_stb     (io_wbs_stb_1),
+    .io_wbs_ack     (io_wbs_ack_1),
+    .io_wbs_cyc     (io_wbs_cyc_1),
+    
+    // Memory 0
+    .csb_mem0   (csb0_mem0),
+    .web_mem0   (web0_mem0),
+    .wmask_mem0 (wmask0_mem0),
+    .addr_mem0  (addr0_mem0),
+    .din_mem0   (din0_mem0),
+    .dout_mem0  (dout0_mem0),
+    
+    // Memory 1
+    .csb_mem1   (csb0_mem1),
+    .web_mem1   (web0_mem1),
+    .wmask_mem1 (wmask0_mem1),
+    .addr_mem1  (addr0_mem1),
+    .din_mem1   (din0_mem1),
+    .dout_mem1  (dout0_mem1)
+);
+
+wire        csb1_mem0;
+wire [ 8:0] addr1_mem0;
+wire [31:0] dout1_mem0;
+
+wire        csb1_mem1;
+wire [ 8:0] addr1_mem1;
+wire [31:0] dout1_mem1;
 
 merge_memory merge_memory_inst (
 `ifdef USE_POWER_PINS
@@ -200,14 +248,14 @@ merge_memory merge_memory_inst (
     .dout   (dout1),
     
     // Memory 0
-    .csb_mem0   (csb_mem0),
-    .addr_mem0  (addr_mem0),
-    .dout_mem0  (dout_mem0),
+    .csb_mem0   (csb1_mem0),
+    .addr_mem0  (addr1_mem0),
+    .dout_mem0  (dout1_mem0),
     
     // Memory 1
-    .csb_mem1   (csb_mem1),
-    .addr_mem1  (addr_mem1),
-    .dout_mem1  (dout_mem1)
+    .csb_mem1   (csb1_mem1),
+    .addr_mem1  (addr1_mem1),
+    .dout_mem1  (dout1_mem1)
 );
 
 sky130_sram_2kbyte_1rw1r_32x512_8 sky130_sram_2kbyte_1rw1r_32x512_8_inst0 (
@@ -216,21 +264,20 @@ sky130_sram_2kbyte_1rw1r_32x512_8 sky130_sram_2kbyte_1rw1r_32x512_8_inst0 (
 	.vssd1(vssd1),	// User area 1 digital ground
 `endif
 
-    // TODO
     // Port 0: RW
-    .clk0   (),
-    .csb0   (),
-    .web0   (),
-    .wmask0 (),
-    .addr0  (),
-    .din0   (),
-    .dout0  (),
+    .clk0   (wb_clk_i),
+    .csb0   (csb0_mem0),
+    .web0   (web0_mem0),
+    .wmask0 (wmask0_mem0),
+    .addr0  (addr0_mem0),
+    .din0   (din0_mem0),
+    .dout0  (dout0_mem0),
 
     // Port 1: R
     .clk1   (wb_clk_i),
-    .csb1   (csb_mem0),
-    .addr1  (addr_mem0),
-    .dout1  (dout_mem0)
+    .csb1   (csb1_mem0),
+    .addr1  (addr1_mem0),
+    .dout1  (dout1_mem0)
 );
 
 sky130_sram_2kbyte_1rw1r_32x512_8 sky130_sram_2kbyte_1rw1r_32x512_8_inst1 (
@@ -239,21 +286,20 @@ sky130_sram_2kbyte_1rw1r_32x512_8 sky130_sram_2kbyte_1rw1r_32x512_8_inst1 (
 	.vssd1(vssd1),	// User area 1 digital ground
 `endif
 
-    // TODO
     // Port 0: RW
-    .clk0   (),
-    .csb0   (),
-    .web0   (),
-    .wmask0 (),
-    .addr0  (),
-    .din0   (),
-    .dout0  (),
+    .clk0   (wb_clk_i),
+    .csb0   (csb0_mem1),
+    .web0   (web0_mem1),
+    .wmask0 (wmask0_mem1),
+    .addr0  (addr0_mem1),
+    .din0   (din0_mem1),
+    .dout0  (dout0_mem1),
 
     // Port 1: R
     .clk1   (wb_clk_i),
-    .csb1   (csb_mem1),
-    .addr1  (addr_mem1),
-    .dout1  (dout_mem1)
+    .csb1   (csb1_mem1),
+    .addr1  (addr1_mem1),
+    .dout1  (dout1_mem1)
 );
 
 endmodule	// user_project_wrapper

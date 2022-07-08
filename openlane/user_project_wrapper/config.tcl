@@ -39,16 +39,17 @@ set ::env(VERILOG_FILES) "\
 
 ## Clock configurations
 set ::env(CLOCK_PORT) "user_clock2"
-set ::env(CLOCK_NET) "my_wfg.io_wbs_clk"
+set ::env(CLOCK_NET) "wfg_top_inst.io_wbs_clk"
 
 set ::env(CLOCK_PERIOD) "20"
 
 ## Internal Macros
 ### Macro PDN Connections
 set ::env(FP_PDN_MACRO_HOOKS) "\
-	my_wfg vccd1 vssd1 \
+	wfg_top_inst vccd1 vssd1 \
 	merge_memory_inst vccd1 vssd1 \
 	wb_mux_inst vccd1 vssd1 \
+	wb_memory_inst vccd1 vssd1 \
 	sky130_sram_2kbyte_1rw1r_32x512_8_inst0 vccd1 vssd1 \
 	sky130_sram_2kbyte_1rw1r_32x512_8_inst1 vccd1 vssd1"
 
@@ -66,18 +67,21 @@ set ::env(VERILOG_FILES_BLACKBOX) "\
 	$script_dir/../../verilog/rtl/wfg_top_blackbox.v \
 	$script_dir/../../verilog/rtl/merge_memory_blackbox.v \
 	$script_dir/../../verilog/rtl/wb_mux_blackbox.v \
+	$script_dir/../../verilog/rtl/wb_memory_blackbox.v \
 	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/sky130_sram_macros/verilog/sky130_sram_2kbyte_1rw1r_32x512_8.v"
 
 set ::env(EXTRA_LEFS) "\
 	$script_dir/../../lef/wfg_top.lef \
 	$script_dir/../../lef/merge_memory.lef \
 	$script_dir/../../lef/wb_mux.lef \
+	$script_dir/../../lef/wb_memory.lef \
 	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/sky130_sram_macros/lef/sky130_sram_2kbyte_1rw1r_32x512_8.lef"
 
 set ::env(EXTRA_GDS_FILES) "\
 	$script_dir/../../gds/wfg_top.gds \
 	$script_dir/../../gds/merge_memory.gds \
 	$script_dir/../../gds/wb_mux.gds \
+	$script_dir/../../gds/wb_memory.gds \
 	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/sky130_sram_macros/gds/sky130_sram_2kbyte_1rw1r_32x512_8.gds"
 
 set ::env(EXTRA_LIBS) "\

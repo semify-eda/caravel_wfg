@@ -109,6 +109,22 @@ void main()
     wfg_set_register(0x6, 0x8, 0xFFFFFFFF); // Low bit
     wfg_set_register(0x6, 0xC, 0xFFFFFFFF); // High bit
     wfg_set_register(0x6, 0x0, 0xFFFFFFFF); // Enable all bits
+    
+    for (int i=0; i<0xF; i++)
+    {
+        *(((volatile uint32_t*)0x30001000) + i) = i;
+    }
+    
+    for (int i=0; i<0xF; i++)
+    {
+        *(((volatile uint32_t*)0x30001000) + i) = i;
+    }
+    
+    for (int i=0; i<0xF; i++)
+    {
+        *(((volatile uint32_t*)0x30001000) + i) = i;
+    }
+
 }
 
 volatile uint8_t test = 0;
