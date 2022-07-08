@@ -96,7 +96,7 @@ void main()
     // Mem
     wfg_set_register(0x4, 0x4, 0x4); // Start
     wfg_set_register(0x4, 0x8, 0xF); // End
-    wfg_set_register(0x4, 0xC, 0x2); // Increment
+    wfg_set_register(0x4, 0xC, 0x0001<<8 | 0x02); // Configuration
     wfg_set_register(0x4, 0x0, 1); // Enable
 
     // SPI
@@ -112,18 +112,14 @@ void main()
     
     for (int i=0; i<0xF; i++)
     {
-        *(((volatile uint32_t*)0x30001000) + i) = i;
+        *(((volatile uint8_t*)0x30001000) + i) = i;
     }
     
-    for (int i=0; i<0xF; i++)
+    for (int i=0; i<0xFF; i++)
     {
-        *(((volatile uint32_t*)0x30001000) + i) = i;
+        *(((volatile uint32_t*)0x30001000) + 2030) = *(((volatile uint32_t*)0x30001000) + i);
     }
     
-    for (int i=0; i<0xF; i++)
-    {
-        *(((volatile uint32_t*)0x30001000) + i) = i;
-    }
 
 }
 

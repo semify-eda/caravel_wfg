@@ -18,8 +18,9 @@ module wb_mux #(
     input   [31:0] io_wbs_datwr,
     output logic [31:0] io_wbs_datrd,
     input          io_wbs_we,
+    input   [ 3:0] io_wbs_sel,
     input          io_wbs_stb,
-    output logic        io_wbs_ack,
+    output logic   io_wbs_ack,
     input          io_wbs_cyc,
     
     // WB Peripheral 0
@@ -27,6 +28,7 @@ module wb_mux #(
     output  [31:0] io_wbs_datwr_0,
     input   [31:0] io_wbs_datrd_0,
     output         io_wbs_we_0,
+    output  [ 3:0] io_wbs_sel_0,
     output         io_wbs_stb_0,
     input          io_wbs_ack_0,
     output         io_wbs_cyc_0,
@@ -37,6 +39,7 @@ module wb_mux #(
     output  [31:0] io_wbs_datwr_1,
     input   [31:0] io_wbs_datrd_1,
     output         io_wbs_we_1,
+    output  [ 3:0] io_wbs_sel_1,
     output         io_wbs_stb_1,
     input          io_wbs_ack_1,
     output         io_wbs_cyc_1
@@ -52,6 +55,7 @@ module wb_mux #(
     assign io_wbs_adr_0     = io_wbs_adr;
     assign io_wbs_datwr_0   = io_wbs_datwr;
     assign io_wbs_we_0      = io_wbs_we;
+    assign io_wbs_sel_0     = io_wbs_sel;
     assign io_wbs_stb_0     = io_wbs_stb & match_0;
     assign io_wbs_cyc_0     = io_wbs_cyc & match_0;
 
@@ -59,6 +63,7 @@ module wb_mux #(
     assign io_wbs_adr_1     = io_wbs_adr;
     assign io_wbs_datwr_1   = io_wbs_datwr;
     assign io_wbs_we_1      = io_wbs_we;
+    assign io_wbs_sel_1     = io_wbs_sel;
     assign io_wbs_stb_1     = io_wbs_stb & match_1;
     assign io_wbs_cyc_1     = io_wbs_cyc & match_1;
     
