@@ -14,7 +14,7 @@ module merge_memory (
     output logic [31:0] dout,
     
     // Memory 0
-    output logic       csb_mem0,
+    output logic        csb_mem0,
     output logic [ 8:0] addr_mem0,
     input  [31:0] dout_mem0,
     

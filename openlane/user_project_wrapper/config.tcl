@@ -46,12 +46,12 @@ set ::env(CLOCK_PERIOD) "20"
 ## Internal Macros
 ### Macro PDN Connections
 set ::env(FP_PDN_MACRO_HOOKS) "\
-	wfg_top_inst vccd1 vssd1 \
-	merge_memory_inst vccd1 vssd1 \
-	wb_mux_inst vccd1 vssd1 \
-	wb_memory_inst vccd1 vssd1 \
-	sky130_sram_2kbyte_1rw1r_32x512_8_inst0 vccd1 vssd1 \
-	sky130_sram_2kbyte_1rw1r_32x512_8_inst1 vccd1 vssd1"
+	wfg_top_inst vccd1 vssd1 vccd1 vssd1 \
+	merge_memory_inst vccd1 vssd1 vccd1 vssd1 \
+	wb_mux_inst vccd1 vssd1 vccd1 vssd1 \
+	wb_memory_inst vccd1 vssd1 vccd1 vssd1 \
+	sky130_sram_2kbyte_1rw1r_32x512_8_inst0 vccd1 vssd1 vccd1 vssd1 \
+	sky130_sram_2kbyte_1rw1r_32x512_8_inst1 vccd1 vssd1 vccd1 vssd1"
 
 # Don't use magic for DRC because of OpenRAM DRC
 set ::env(MAGIC_DRC_USE_GDS) 0

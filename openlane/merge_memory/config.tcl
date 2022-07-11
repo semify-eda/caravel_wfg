@@ -50,6 +50,6 @@ set ::env(ROUTING_CORES) "6"
 set ::env(VDD_NETS) [list {vccd1}]
 set ::env(GND_NETS) [list {vssd1}]
 
-set ::env(DIODE_INSERTION_STRATEGY) 3
+set ::env(DIODE_INSERTION_STRATEGY) 4
 # If you're going to use multiple power domains, then disable cvc run.
 set ::env(RUN_CVC) 1

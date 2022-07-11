@@ -15,6 +15,7 @@ module wb_memory (
     input  [31:0] io_wbs_datwr,
     output [31:0] io_wbs_datrd,
     input         io_wbs_we,
+    input  [ 3:0] io_wbs_sel,
     input         io_wbs_stb,
     output        io_wbs_ack,
     input         io_wbs_cyc,

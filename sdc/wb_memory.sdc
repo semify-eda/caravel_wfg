@@ -1,6 +1,6 @@
 ###############################################################################
 # Created by write_sdc
-# Thu Jul  7 10:09:53 2022
+# Mon Jul 11 07:55:36 2022
 ###############################################################################
 current_design wb_memory
 ###############################################################################
@@ -140,6 +140,10 @@ set_input_delay 4.0000 -clock [get_clocks {io_wbs_clk}] -add_delay [get_ports {i
 set_input_delay 4.0000 -clock [get_clocks {io_wbs_clk}] -add_delay [get_ports {io_wbs_datwr[8]}]
 set_input_delay 4.0000 -clock [get_clocks {io_wbs_clk}] -add_delay [get_ports {io_wbs_datwr[9]}]
 set_input_delay 4.0000 -clock [get_clocks {io_wbs_clk}] -add_delay [get_ports {io_wbs_rst}]
+set_input_delay 4.0000 -clock [get_clocks {io_wbs_clk}] -add_delay [get_ports {io_wbs_sel[0]}]
+set_input_delay 4.0000 -clock [get_clocks {io_wbs_clk}] -add_delay [get_ports {io_wbs_sel[1]}]
+set_input_delay 4.0000 -clock [get_clocks {io_wbs_clk}] -add_delay [get_ports {io_wbs_sel[2]}]
+set_input_delay 4.0000 -clock [get_clocks {io_wbs_clk}] -add_delay [get_ports {io_wbs_sel[3]}]
 set_input_delay 4.0000 -clock [get_clocks {io_wbs_clk}] -add_delay [get_ports {io_wbs_stb}]
 set_input_delay 4.0000 -clock [get_clocks {io_wbs_clk}] -add_delay [get_ports {io_wbs_we}]
 set_output_delay 4.0000 -clock [get_clocks {io_wbs_clk}] -add_delay [get_ports {addr_mem0[0]}]
@@ -532,6 +536,10 @@ set_driving_cell -lib_cell sky130_fd_sc_hd__inv_2 -pin {Y} -input_transition_ris
 set_driving_cell -lib_cell sky130_fd_sc_hd__inv_2 -pin {Y} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {io_wbs_datwr[2]}]
 set_driving_cell -lib_cell sky130_fd_sc_hd__inv_2 -pin {Y} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {io_wbs_datwr[1]}]
 set_driving_cell -lib_cell sky130_fd_sc_hd__inv_2 -pin {Y} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {io_wbs_datwr[0]}]
+set_driving_cell -lib_cell sky130_fd_sc_hd__inv_2 -pin {Y} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {io_wbs_sel[3]}]
+set_driving_cell -lib_cell sky130_fd_sc_hd__inv_2 -pin {Y} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {io_wbs_sel[2]}]
+set_driving_cell -lib_cell sky130_fd_sc_hd__inv_2 -pin {Y} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {io_wbs_sel[1]}]
+set_driving_cell -lib_cell sky130_fd_sc_hd__inv_2 -pin {Y} -input_transition_rise 0.0000 -input_transition_fall 0.0000 [get_ports {io_wbs_sel[0]}]
 set_timing_derate -early 0.9500
 set_timing_derate -late 1.0500
 ###############################################################################
