@@ -44,10 +44,13 @@ module wb_memory (
     logic [29:0] my_address;
     assign my_address = io_wbs_adr[31:2];
     
+    logic mem_select;
+    assign mem_select = my_address[9];
+    
     // Read merging
     logic [31:0] dout_mem;
     always_comb begin
-        if (my_address[9] == 0) begin
+        if (mem_select == 0) begin
             dout_mem = dout_mem0;
         end else begin
             dout_mem = dout_mem1;
@@ -72,31 +75,38 @@ module wb_memory (
         web_mem0 = 1'b1;
         web_mem1 = 1'b1;
     
-        if (my_address[9] == 0) begin
+        if (mem_select == 0) begin
             web_mem0 = web_mem;
         end else begin
             web_mem1 = web_mem;
         end
     end
     
+    logic operation;
     always_ff @(posedge io_wbs_clk, posedge io_wbs_rst) begin
         if (io_wbs_rst) begin
             web_mem <= 1'b1;
             io_wbs_ack <= 1'b0;
             io_wbs_datrd <= '0;
+            operation <= 1'b0;
         end else begin
             web_mem <= 1'b1;
             io_wbs_ack <= 1'b0;
+            operation <= 1'b0;
 
-            if (io_wbs_cyc && io_wbs_stb && !io_wbs_ack) begin
-                io_wbs_ack <= 1'b1;
-                
-                // Always read the memory
-                io_wbs_datrd <= dout_mem;
+            if (io_wbs_cyc && io_wbs_stb && !io_wbs_ack && !operation) begin 
+                operation <= 1'b1;
                 
                 if (io_wbs_we) begin
                     web_mem <= 1'b0;
                 end
+            end
+            
+            if (operation) begin
+                io_wbs_ack <= 1'b1;
+                
+                // Always read the memory
+                io_wbs_datrd <= dout_mem;
             end
             
             /*if (web_mem) begin

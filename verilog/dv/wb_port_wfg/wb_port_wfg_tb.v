@@ -50,6 +50,7 @@ module wb_port_wfg_tb;
     
     assign clock = my_clock;
 
+    integer j;
 	initial begin
 		$dumpfile("wb_port_wfg.vcd");
 		$dumpvars(0, wb_port_wfg_tb);
@@ -66,13 +67,20 @@ module wb_port_wfg_tb;
 			$display ("Monitor: Timeout, Test Mega-Project WB WFG (RTL) Failed");
 		`endif
 		$display("%c[0m",27);
+		
+		$display("memory dump");
+		$display("  mem0  \t  mem1  ");
+        for (j=0;j<512;j++) begin
+            $display("[%h] : %h \t [%h] : %h", j, uut.mprj.sky130_sram_2kbyte_1rw1r_32x512_8_inst0.mem[j], j, uut.mprj.sky130_sram_2kbyte_1rw1r_32x512_8_inst1.mem[j]);
+        end
+
 		$finish;
 	end
 	
-    initial begin
+    /*initial begin
         $readmemh("memory.hex", uut.mprj.sky130_sram_2kbyte_1rw1r_32x512_8_inst0.mem);
         $readmemh("memory.hex", uut.mprj.sky130_sram_2kbyte_1rw1r_32x512_8_inst1.mem);
-    end
+    end*/
 
     // Deserialize data
     integer data, i;

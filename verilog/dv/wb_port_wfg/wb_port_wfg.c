@@ -115,12 +115,15 @@ void main()
         *(((volatile uint8_t*)0x30001000) + i) = i;
     }
     
-    for (int i=0; i<0xFF; i++)
+    for (int i=0; i<0xF; i++)
     {
-        *(((volatile uint32_t*)0x30001000) + 2030) = *(((volatile uint32_t*)0x30001000) + i);
+        *(((volatile uint32_t*)0x30001000) + 510 + i) = *(((volatile uint32_t*)0x30001000) + (i % 4));
     }
     
-
+    for (int i=0; i<0xF; i++)
+    {
+        *(((volatile uint32_t*)0x30001000) + i + 0xFF) = *(((volatile uint32_t*)0x30001000) + 512 + i);
+    }
 }
 
 volatile uint8_t test = 0;
