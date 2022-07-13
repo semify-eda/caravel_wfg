@@ -56,7 +56,7 @@ module wb_port_wfg_tb;
 		$dumpvars(0, wb_port_wfg_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (300) begin
+		repeat (400) begin
 			repeat (1000) @(posedge my_clock);
 			// $display("+1000 cycles");
 		end
@@ -89,44 +89,54 @@ module wb_port_wfg_tb;
             @(posedge sclk);
             data[i] = sdo;
         end
+        $display("SPI received: %h", data);
     end
 
+    integer k;
 	initial begin
         @(negedge cs);
 		$display("Monitor: MPRJ-Logic WB WFG Started");
 		
-        @(posedge cs);
-        wait(data === 25094);
-        @(posedge cs);
-        wait(data === 46345);
-        @(posedge cs);
-        wait(data === 60543);
-        @(posedge cs);
-        wait(data === 65533);
-        @(posedge cs);
-        wait(data === 60539);
-        @(posedge cs);
-        wait(data === 46336);
-        @(posedge cs);
-        wait(data === 25084);
-        @(posedge cs);
-        wait(data === 10);
-        @(posedge cs);
-        wait(data === 237050);
-        @(posedge cs);
-        wait(data === 215799);
-        @(posedge cs);
-        wait(data === 201601);
-        @(posedge cs);
-        wait(data === 196611);
-        @(posedge cs);
-        wait(data === 201605);
-        @(posedge cs);
-        wait(data === 215808);
-        @(posedge cs);
-        wait(data === 237060);
-        @(posedge cs);
-        wait(data === 262134);
+		for (k=0; k<10; k++) begin
+            @(posedge cs);
+            wait(data === 32'hfffffff6);
+            @(posedge cs);
+            wait(data === 32'h00006206);
+            @(posedge cs);
+            wait(data === 32'h0000b509);
+            @(posedge cs);
+            wait(data === 32'h0000ec7f);
+            @(posedge cs);
+            wait(data === 32'h0000fffd);
+            @(posedge cs);
+            wait(data === 32'h0000ec7b);
+            @(posedge cs);
+            wait(data === 32'h0000b500);
+            @(posedge cs);
+            wait(data === 32'h000061fc);
+            @(posedge cs);
+            wait(data === 32'h0000000a);
+            @(posedge cs);
+            wait(data === 32'hffff9dfa);
+            @(posedge cs);
+            wait(data === 32'hffff4af7);
+            @(posedge cs);
+            wait(data === 32'hffff1381);
+            @(posedge cs);
+            wait(data === 32'hffff0003);
+            @(posedge cs);
+            wait(data === 32'hffff1385);
+            @(posedge cs);
+            wait(data === 32'hffff4b00);
+            @(posedge cs);
+            wait(data === 32'hfffffff6);
+        end
+        
+		$display("memory dump");
+		$display("  mem0  \t  mem1  ");
+        for (j=0;j<512;j++) begin
+            $display("[%h] : %h \t [%h] : %h", j, uut.mprj.sky130_sram_2kbyte_1rw1r_32x512_8_inst0.mem[j], j, uut.mprj.sky130_sram_2kbyte_1rw1r_32x512_8_inst1.mem[j]);
+        end
 
 		`ifdef GL
 	    	$display("Monitor: Mega-Project WB WFG (GL) Passed");

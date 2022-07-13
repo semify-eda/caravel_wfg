@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 `default_nettype none
-module wfg_core (
+module wfg_subcore (
     input wire clk,    // I; System clock
     input wire rst_n,  // I; Active low reset
     input wire en_i,   // I; Enable signal
@@ -12,11 +12,11 @@ module wfg_core (
     input wire [15:0] wfg_subcycle_count_i, // I; Subcycle counter threshold
 
     // Signals
-    output wire       wfg_core_sync_o,          // O; Sync signal
-    output wire       wfg_core_subcycle_o,      // O; Subcycle signal
-    output wire       wfg_core_start_o,         // O; Indicate start
-    output wire [7:0] wfg_core_subcycle_cnt_o,  // O; Subcycle pulse counter
-    output wire       active_o                  // O; Active indication signal
+    output wire       wfg_subcore_sync_o,          // O; Sync signal
+    output wire       wfg_subcore_subcycle_o,      // O; Subcycle signal
+    output wire       wfg_subcore_start_o,         // O; Indicate start
+    output wire [7:0] wfg_subcore_subcycle_cnt_o,  // O; Subcycle pulse counter
+    output wire       active_o                     // O; Active indication signal
 );
 
     // -------------------------------------------------------------------------
@@ -65,7 +65,7 @@ module wfg_core (
 
                 end
 
-                if (wfg_core_subcycle_o) begin
+                if (wfg_subcore_subcycle_o) begin
                     subcycle_pls_cnt <= subcycle_pls_cnt + 1;
                 end
 
@@ -81,7 +81,7 @@ module wfg_core (
             sync_dly     <= temp_sync;
             en_i_dly     <= en_i;
 
-            if (wfg_core_sync_o) begin
+            if (wfg_subcore_sync_o) begin
                 subcycle_pls_cnt <= 8'd0;
             end
 
@@ -89,11 +89,11 @@ module wfg_core (
 
     end
 
-    assign wfg_core_subcycle_o     = temp_subcycle & ~subcycle_dly;
-    assign wfg_core_sync_o         = temp_sync & ~sync_dly;
-    assign active_o                = en_i;
-    assign wfg_core_start_o        = en_i & ~en_i_dly;
-    assign wfg_core_subcycle_cnt_o = subcycle_pls_cnt;
+    assign wfg_subcore_subcycle_o     = temp_subcycle & ~subcycle_dly;
+    assign wfg_subcore_sync_o         = temp_sync & ~sync_dly;
+    assign active_o                   = en_i;
+    assign wfg_subcore_start_o        = en_i & ~en_i_dly;
+    assign wfg_subcore_subcycle_cnt_o = subcycle_pls_cnt;
 
 endmodule
 `default_nettype wire

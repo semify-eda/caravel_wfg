@@ -6,6 +6,9 @@
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_core/rtl/wfg_core.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_core/rtl/wfg_core_top.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_core/rtl/wfg_core_wishbone_reg.sv
+-v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_subcore/rtl/wfg_subcore.sv
+-v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_subcore/rtl/wfg_subcore_top.sv
+-v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_subcore/rtl/wfg_subcore_wishbone_reg.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_interconnect/rtl/wfg_interconnect.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_interconnect/rtl/wfg_interconnect_top.sv
 -v $(USER_PROJECT_VERILOG)/rtl/wfg/wfg_interconnect/rtl/wfg_interconnect_wishbone_reg.sv

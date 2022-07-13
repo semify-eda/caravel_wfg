@@ -49,6 +49,7 @@ module wfg_top #(
     // Adress select lines
     logic wfg_sel;
     logic wfg_core_sel;
+    logic wfg_subcore_sel;
     logic wfg_intercnct_sel;
     logic wfg_stim_sine_sel;
     logic wfg_stim_mem_sel;
@@ -59,24 +60,27 @@ module wfg_top #(
 
     // Nothing should be assigned to the null page
     assign wfg_core_sel      = (io_wbs_adr[BUSW-5:4] == 28'h01);  // 0x10
-    assign wfg_intercnct_sel = (io_wbs_adr[BUSW-5:4] == 28'h02);  // 0x20
-    assign wfg_stim_sine_sel = (io_wbs_adr[BUSW-5:4] == 28'h03);  // 0x30
-    assign wfg_stim_mem_sel  = (io_wbs_adr[BUSW-5:4] == 28'h04);  // 0x40
-    assign wfg_drive_spi_sel = (io_wbs_adr[BUSW-5:4] == 28'h05);  // 0x50
-    assign wfg_drive_pat_sel = (io_wbs_adr[BUSW-5:4] == 28'h06);  // 0x60
+    assign wfg_subcore_sel   = (io_wbs_adr[BUSW-5:4] == 28'h02);  // 0x20
+    assign wfg_intercnct_sel = (io_wbs_adr[BUSW-5:4] == 28'h03);  // 0x30
+    assign wfg_stim_sine_sel = (io_wbs_adr[BUSW-5:4] == 28'h04);  // 0x40
+    assign wfg_stim_mem_sel  = (io_wbs_adr[BUSW-5:4] == 28'h05);  // 0x50
+    assign wfg_drive_spi_sel = (io_wbs_adr[BUSW-5:4] == 28'h06);  // 0x60
+    assign wfg_drive_pat_sel = (io_wbs_adr[BUSW-5:4] == 28'h07);  // 0x70
 
     // Acknowledgement
     logic wfg_core_ack;
+    logic wfg_subcore_ack;
     logic wfg_intercnct_ack;
     logic wfg_stim_sine_ack;
     logic wfg_stim_mem_ack;
     logic wfg_drive_spi_ack;
     logic wfg_drive_pat_ack;
 
-    assign io_wbs_ack = (wfg_core_ack) || (wfg_intercnct_ack) || (wfg_stim_sine_ack) || (wfg_stim_mem_ack) || (wfg_drive_spi_ack) || (wfg_drive_pat_ack);
+    assign io_wbs_ack = (wfg_core_ack) || (wfg_subcore_ack) || (wfg_intercnct_ack) || (wfg_stim_sine_ack) || (wfg_stim_mem_ack) || (wfg_drive_spi_ack) || (wfg_drive_pat_ack);
 
     // Return data
     logic [(BUSW-1):0] wfg_core_data;
+    logic [(BUSW-1):0] wfg_subcore_data;
     logic [(BUSW-1):0] wfg_intercnct_data;
     logic [(BUSW-1):0] wfg_stim_sine_data;
     logic [(BUSW-1):0] wfg_stim_mem_data;
@@ -89,6 +93,8 @@ module wfg_top #(
         unique case (1'b1)
             wfg_core_sel:
                 my_io_wbs_datrd = wfg_core_data;
+            wfg_subcore_sel:
+                my_io_wbs_datrd = wfg_subcore_data;
             wfg_intercnct_sel:
                 my_io_wbs_datrd = wfg_intercnct_data;
             wfg_stim_sine_sel:
@@ -107,11 +113,11 @@ module wfg_top #(
     assign io_wbs_datrd = my_io_wbs_datrd;
 
     // Core synchronisation interface
-    logic wfg_pat_sync;
-    logic wfg_pat_subcycle;
-    logic wfg_pat_start;
-    logic [7:0] wfg_pat_subcycle_cnt;
-    logic active;
+    logic wfg_core_sync;
+    logic wfg_core_subcycle;
+    logic wfg_core_start;
+    logic [7:0] wfg_core_subcycle_cnt;
+    logic wfg_core_active;
 
     wfg_core_top wfg_core_top (
         .wb_clk_i (io_wbs_clk),
@@ -125,11 +131,37 @@ module wfg_top #(
         .wbs_ack_o(wfg_core_ack),
         .wbs_dat_o(wfg_core_data),
 
-        .wfg_pat_sync_o        (wfg_pat_sync),
-        .wfg_pat_subcycle_o    (wfg_pat_subcycle),
-        .wfg_pat_start_o       (wfg_pat_start),
-        .wfg_pat_subcycle_cnt_o(wfg_pat_subcycle_cnt),
-        .active_o              (active)
+        .wfg_core_sync_o        (wfg_core_sync),
+        .wfg_core_subcycle_o    (wfg_core_subcycle),
+        .wfg_core_start_o       (wfg_core_start),
+        .wfg_core_subcycle_cnt_o(wfg_core_subcycle_cnt),
+        .active_o               (wfg_core_active)
+    );
+
+    // Subcore synchronisation interface
+    logic wfg_subcore_sync;
+    logic wfg_subcore_subcycle;
+    logic wfg_subcore_start;
+    logic [7:0] wfg_subcore_subcycle_cnt;
+    logic wfg_subcore_active;
+
+    wfg_subcore_top wfg_subcore_top (
+        .wb_clk_i (io_wbs_clk),
+        .wb_rst_i (io_wbs_rst),
+        .wbs_stb_i(io_wbs_stb && wfg_subcore_sel && wfg_sel),
+        .wbs_cyc_i(io_wbs_cyc),
+        .wbs_we_i (io_wbs_we),
+        .wbs_sel_i(4'b1111),
+        .wbs_dat_i(io_wbs_datwr),
+        .wbs_adr_i(wfg_subcore_sel ? io_wbs_adr & 4'hF : 4'h0),
+        .wbs_ack_o(wfg_subcore_ack),
+        .wbs_dat_o(wfg_subcore_data),
+
+        .wfg_subcore_sync_o        (wfg_subcore_sync),
+        .wfg_subcore_subcycle_o    (wfg_subcore_subcycle),
+        .wfg_subcore_start_o       (wfg_subcore_start),
+        .wfg_subcore_subcycle_cnt_o(wfg_subcore_subcycle_cnt),
+        .active_o                  (wfg_subcore_active)
     );
 
     axis_t driver_0;
@@ -218,8 +250,11 @@ module wfg_top #(
         .wbs_ack_o(wfg_drive_spi_ack),
         .wbs_dat_o(wfg_drive_spi_data),
 
-        .wfg_pat_sync_i    (wfg_pat_sync),
-        .wfg_pat_subcycle_i(wfg_pat_subcycle),
+        .wfg_core_sync_i    (wfg_core_sync),
+        .wfg_core_subcycle_i(wfg_core_subcycle),
+
+        .wfg_subcore_sync_i    (wfg_subcore_sync),
+        .wfg_subcore_subcycle_i(wfg_subcore_subcycle),
 
         .wfg_axis_tready_o(driver_0_wfg_axis_tready),
         .wfg_axis_tdata_i (driver_0.wfg_axis_tdata),
@@ -247,8 +282,11 @@ module wfg_top #(
         .wbs_ack_o(wfg_drive_pat_ack),
         .wbs_dat_o(wfg_drive_pat_data),
 
-        .wfg_pat_sync_i        (wfg_pat_sync),
-        .wfg_pat_subcycle_cnt_i(wfg_pat_subcycle_cnt),
+        .wfg_core_sync_i        (wfg_core_sync),
+        .wfg_core_subcycle_cnt_i(wfg_core_subcycle_cnt),
+
+        .wfg_subcore_sync_i        (wfg_subcore_sync),
+        .wfg_subcore_subcycle_cnt_i(wfg_subcore_subcycle_cnt),
 
         .wfg_axis_tready_o(driver_1_wfg_axis_tready),
         .wfg_axis_tdata_i (driver_1.wfg_axis_tdata),

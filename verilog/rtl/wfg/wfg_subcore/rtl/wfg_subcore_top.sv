@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 `default_nettype none
-module wfg_core_top #(
+module wfg_subcore_top #(
     parameter int BUSW = 32
 ) (
     // Wishbone Slave ports
@@ -17,16 +17,16 @@ module wfg_core_top #(
     output                wbs_ack_o,
     output [  (BUSW-1):0] wbs_dat_o,
 
-    // Core synchronisation interface
-    output wire       wfg_core_sync_o,          // O; Sync signal
-    output wire       wfg_core_subcycle_o,      // O; Subcycle signal
-    output wire       wfg_core_start_o,         // O; Indicate start
-    output wire [7:0] wfg_core_subcycle_cnt_o,  // O; Subcycle pulse counter
-    output wire       active_o                  // O; Active indication signal
+    // subcore synchronisation interface
+    output wire       wfg_subcore_sync_o,          // O; Sync signal
+    output wire       wfg_subcore_subcycle_o,      // O; Subcycle signal
+    output wire       wfg_subcore_start_o,         // O; Indicate start
+    output wire [7:0] wfg_subcore_subcycle_cnt_o,  // O; Subcycle pulse counter
+    output wire       active_o                     // O; Active indication signal
 );
     // Registers
     //marker_template_start
-    //data: ../data/wfg_core_reg.json
+    //data: ../data/wfg_subcore_reg.json
     //template: wishbone/instantiate_top.template
     //marker_template_code
 
@@ -36,7 +36,7 @@ module wfg_core_top #(
 
     //marker_template_end
 
-    wfg_core_wishbone_reg wfg_core_wishbone_reg (
+    wfg_subcore_wishbone_reg wfg_subcore_wishbone_reg (
         .wb_clk_i (wb_clk_i),
         .wb_rst_i (wb_rst_i),
         .wbs_stb_i(wbs_stb_i),
@@ -49,7 +49,7 @@ module wfg_core_top #(
         .wbs_dat_o(wbs_dat_o),
 
         //marker_template_start
-        //data: ../data/wfg_core_reg.json
+        //data: ../data/wfg_subcore_reg.json
         //template: wishbone/assign_to_module.template
         //marker_template_code
 
@@ -60,7 +60,7 @@ module wfg_core_top #(
         //marker_template_end
     );
 
-    wfg_core wfg_core (
+    wfg_subcore wfg_subcore (
         .clk  (wb_clk_i),  // clock signal
         .rst_n(!wb_rst_i), // reset signal
 
@@ -72,11 +72,11 @@ module wfg_core_top #(
         .wfg_subcycle_count_i(cfg_subcycle_q), // I: Subcycle counter threshold
 
         // Output
-        .wfg_core_sync_o        (wfg_core_sync_o),          // O; Sync signal
-        .wfg_core_subcycle_o    (wfg_core_subcycle_o),      // O; Subcycle signal
-        .wfg_core_start_o       (wfg_core_start_o),         // O; Indicate start
-        .wfg_core_subcycle_cnt_o(wfg_core_subcycle_cnt_o),  // O; Subcycle pulse counter
-        .active_o               (active_o)                  // O; Active indication signal
+        .wfg_subcore_sync_o        (wfg_subcore_sync_o),          // O; Sync signal
+        .wfg_subcore_subcycle_o    (wfg_subcore_subcycle_o),      // O; Subcycle signal
+        .wfg_subcore_start_o       (wfg_subcore_start_o),         // O; Indicate start
+        .wfg_subcore_subcycle_cnt_o(wfg_subcore_subcycle_cnt_o),  // O; Subcycle pulse counter
+        .active_o                  (active_o)                     // O; Active indication signal
     );
 
 endmodule

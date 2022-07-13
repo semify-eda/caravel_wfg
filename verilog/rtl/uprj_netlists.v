@@ -22,6 +22,9 @@
     `default_nettype wire
     `include "gl/user_project_wrapper.v"
     `include "gl/wfg_top.v"
+    `include "gl/merge_memory.v"
+    `include "gl/wb_memory.v"
+    `include "gl/wb_mux.v"
 `else
     `include "user_project_wrapper.v"
     `include "merge_memory.sv"
@@ -30,6 +33,9 @@
     `include "wfg/wfg_core/rtl/wfg_core.sv"
 	`include "wfg/wfg_core/rtl/wfg_core_top.sv"
 	`include "wfg/wfg_core/rtl/wfg_core_wishbone_reg.sv"
+    `include "wfg/wfg_subcore/rtl/wfg_subcore.sv"
+	`include "wfg/wfg_subcore/rtl/wfg_subcore_top.sv"
+	`include "wfg/wfg_subcore/rtl/wfg_subcore_wishbone_reg.sv"
 	`include "wfg/wfg_interconnect/rtl/wfg_interconnect.sv"
 	`include "wfg/wfg_interconnect/rtl/wfg_interconnect_top.sv"
 	`include "wfg/wfg_interconnect/rtl/wfg_interconnect_wishbone_reg.sv"

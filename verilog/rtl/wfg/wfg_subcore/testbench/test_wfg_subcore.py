@@ -26,10 +26,10 @@ async def set_register(dut, wbs, address, data):
 
 async def configure(dut, wbs, en, sync_count, subcycle_count):
     await set_register(dut, wbs, 0x4, (sync_count << 0) | (subcycle_count << 8))
-    await set_register(dut, wbs, 0x0, en) # Enable core
+    await set_register(dut, wbs, 0x0, en) # Enable subcore
 
 @cocotb.coroutine
-async def core_test(dut, en, sync_count, subcycle_count):
+async def subcore_test(dut, en, sync_count, subcycle_count):
     dut._log.info(f"Configuration: sync_count={sync_count}, subcycle_count={subcycle_count}")
 
     cocotb.start_soon(Clock(dut.io_wbs_clk, 1/SYSCLK*1e9, units="ns").start())
@@ -48,7 +48,7 @@ async def core_test(dut, en, sync_count, subcycle_count):
                               width=32,   # size of data bus
                               timeout=10) # in clock cycle number
 
-    # Setup core
+    # Setup subcore
     await configure(dut, wbs, en, sync_count, subcycle_count)
 
     #await short_per
@@ -57,17 +57,17 @@ async def core_test(dut, en, sync_count, subcycle_count):
     sync_pulse_count = 0
     clk_count = 0
     
-    await FallingEdge(dut.wfg_core_sync_o)
+    await FallingEdge(dut.wfg_subcore_sync_o)
 
     for i in range ((sync_count + 1) * (subcycle_count + 1) * 3):
         await ClockCycles(dut.io_wbs_clk, 1)
         clk_count += 1
    
-        if dut.wfg_core_sync_o == 1:
+        if dut.wfg_subcore_sync_o == 1:
             assert ((sync_pulse_count+1) * clk_count) == ((sync_count + 1) * (subcycle_count + 1) * 2)
             break
             
-        if (dut.wfg_core_subcycle_o == 1):
+        if (dut.wfg_subcore_subcycle_o == 1):
             sync_pulse_count += 1
             clk_count = 0
 
@@ -86,7 +86,7 @@ for i in range(length):
     subcycle_array.append(n)
 
 
-factory = TestFactory(core_test)
+factory = TestFactory(subcore_test)
 factory.add_option("en", [1])
 factory.add_option("sync_count", sync_array)
 factory.add_option("subcycle_count", subcycle_array)

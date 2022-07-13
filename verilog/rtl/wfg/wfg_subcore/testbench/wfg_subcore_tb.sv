@@ -9,7 +9,7 @@
 `define VL_RD
 `endif
 
-module wfg_core_tb #(
+module wfg_subcore_tb #(
     parameter int BUSW = 32
 ) (
     // Wishbone interface signals
@@ -23,15 +23,15 @@ module wfg_core_tb #(
     output              io_wbs_ack,
     input               io_wbs_cyc,
 
-    // Core synchronisation interface
-    output wire       wfg_core_sync_o,          // O; Sync signal
-    output wire       wfg_core_subcycle_o,      // O; Subcycle signal
-    output wire       wfg_core_start_o,         // O; Indicate start
-    output wire [7:0] wfg_core_subcycle_cnt_o,  // O; Subcycle pulse counter
-    output wire       active_o                  // O; Active indication signal
+    // subcore synchronisation interface
+    output wire       wfg_subcore_sync_o,          // O; Sync signal
+    output wire       wfg_subcore_subcycle_o,      // O; Subcycle signal
+    output wire       wfg_subcore_start_o,         // O; Indicate start
+    output wire [7:0] wfg_subcore_subcycle_cnt_o,  // O; Subcycle pulse counter
+    output wire       active_o                     // O; Active indication signal
 );
 
-    wfg_core_top wfg_core_top (
+    wfg_subcore_top wfg_subcore_top (
         .wb_clk_i (io_wbs_clk),
         .wb_rst_i (io_wbs_rst),
         .wbs_stb_i(io_wbs_stb),
@@ -43,19 +43,19 @@ module wfg_core_tb #(
         .wbs_ack_o(io_wbs_ack),
         .wbs_dat_o(io_wbs_datrd),
 
-        // Core synchronisation interface
-        .wfg_core_sync_o(wfg_core_sync_o),
-        .wfg_core_subcycle_o(wfg_core_subcycle_o),
-        .wfg_core_start_o(wfg_core_start_o),
-        .wfg_core_subcycle_cnt_o(wfg_core_subcycle_cnt_o),
+        // subcore synchronisation interface
+        .wfg_subcore_sync_o(wfg_subcore_sync_o),
+        .wfg_subcore_subcycle_o(wfg_subcore_subcycle_o),
+        .wfg_subcore_start_o(wfg_subcore_start_o),
+        .wfg_subcore_subcycle_cnt_o(wfg_subcore_subcycle_cnt_o),
         .active_o(active_o)
     );
 
     // Dump waves
 `ifndef VERILATOR
     initial begin
-        $dumpfile("wfg_core_tb.vcd");
-        $dumpvars(0, wfg_core_tb);
+        $dumpfile("wfg_subcore_tb.vcd");
+        $dumpvars(0, wfg_subcore_tb);
     end
 `endif
 

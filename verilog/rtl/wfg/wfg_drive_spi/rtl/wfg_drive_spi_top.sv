@@ -19,8 +19,12 @@ module wfg_drive_spi_top #(
     output [  (BUSW-1):0] wbs_dat_o,
 
     // Core synchronisation interface
-    input wire wfg_pat_sync_i,     // I; pat_sync pulse
-    input wire wfg_pat_subcycle_i, // I; subcycle_cnt
+    input wire wfg_core_sync_i,     // I; core_sync pulse
+    input wire wfg_core_subcycle_i, // I; subcycle_cnt
+
+    // Subcore synchronisation interface
+    input logic wfg_subcore_sync_i,     // I; Sync pulse
+    input logic wfg_subcore_subcycle_i, // I; Subcycle pulse
 
     // AXI-Stream interface
     output wire wfg_axis_tready_o,
@@ -39,6 +43,7 @@ module wfg_drive_spi_top #(
     //template: wishbone/instantiate_top.template
     //marker_template_code
 
+    logic         cfg_core_sel_q;          // CFG.CORE_SEL register output
     logic         cfg_cpol_q;              // CFG.CPOL register output
     logic [ 3: 2] cfg_dff_q;               // CFG.DFF register output
     logic         cfg_lsbfirst_q;          // CFG.LSBFIRST register output
@@ -65,6 +70,7 @@ module wfg_drive_spi_top #(
         //template: wishbone/assign_to_module.template
         //marker_template_code
 
+        .cfg_core_sel_q_o(cfg_core_sel_q),  // CFG.CORE_SEL register output
         .cfg_cpol_q_o    (cfg_cpol_q),      // CFG.CPOL register output
         .cfg_dff_q_o     (cfg_dff_q),       // CFG.DFF register output
         .cfg_lsbfirst_q_o(cfg_lsbfirst_q),  // CFG.LSBFIRST register output
@@ -80,8 +86,12 @@ module wfg_drive_spi_top #(
         .rst_n(!wb_rst_i), // reset signal
 
         // Core synchronisation interface
-        .wfg_pat_sync_i    (wfg_pat_sync_i),
-        .wfg_pat_subcycle_i(wfg_pat_subcycle_i),
+        .wfg_core_sync_i    (wfg_core_sync_i),
+        .wfg_core_subcycle_i(wfg_core_subcycle_i),
+
+        // Subcore synchronisation interface
+        .wfg_subcore_sync_i    (wfg_subcore_sync_i),
+        .wfg_subcore_subcycle_i(wfg_subcore_subcycle_i),
 
         // AXI streaming interface
         .wfg_axis_tready_o(wfg_axis_tready_o),  // O; ready
@@ -98,6 +108,7 @@ module wfg_drive_spi_top #(
         .cfg_lsbfirst_q_i(cfg_lsbfirst_q),  // I; Frame format
         .cfg_dff_q_i     (cfg_dff_q),       // I; Data frame format
         .cfg_sspol_q_i   (cfg_sspol_q),     // I; Slave select polarity
+        .cfg_core_sel_q_i(cfg_core_sel_q),  // I; Core select
 
         // SPI IO interface
         .wfg_drive_spi_sclk_o(wfg_drive_spi_sclk_o),  // O; clock
