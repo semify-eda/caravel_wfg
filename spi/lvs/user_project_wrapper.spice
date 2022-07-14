@@ -117,8 +117,10 @@
 + io_wbs_datwr_1[23] io_wbs_datwr_1[24] io_wbs_datwr_1[25] io_wbs_datwr_1[26] io_wbs_datwr_1[27]
 + io_wbs_datwr_1[28] io_wbs_datwr_1[29] io_wbs_datwr_1[2] io_wbs_datwr_1[30] io_wbs_datwr_1[31]
 + io_wbs_datwr_1[3] io_wbs_datwr_1[4] io_wbs_datwr_1[5] io_wbs_datwr_1[6] io_wbs_datwr_1[7]
-+ io_wbs_datwr_1[8] io_wbs_datwr_1[9] io_wbs_stb io_wbs_stb_0 io_wbs_stb_1 io_wbs_we
-+ io_wbs_we_0 io_wbs_we_1 vccd1 vssd1
++ io_wbs_datwr_1[8] io_wbs_datwr_1[9] io_wbs_sel[0] io_wbs_sel[1] io_wbs_sel[2] io_wbs_sel[3]
++ io_wbs_sel_0[0] io_wbs_sel_0[1] io_wbs_sel_0[2] io_wbs_sel_0[3] io_wbs_sel_1[0]
++ io_wbs_sel_1[1] io_wbs_sel_1[2] io_wbs_sel_1[3] io_wbs_stb io_wbs_stb_0 io_wbs_stb_1
++ io_wbs_we io_wbs_we_0 io_wbs_we_1 vccd1 vssd1
 .ends
 
 * Black-box entry subcircuit for sky130_sram_2kbyte_1rw1r_32x512_8 abstract view
@@ -181,9 +183,9 @@
 + io_wbs_datwr[24] io_wbs_datwr[25] io_wbs_datwr[26] io_wbs_datwr[27] io_wbs_datwr[28]
 + io_wbs_datwr[29] io_wbs_datwr[2] io_wbs_datwr[30] io_wbs_datwr[31] io_wbs_datwr[3]
 + io_wbs_datwr[4] io_wbs_datwr[5] io_wbs_datwr[6] io_wbs_datwr[7] io_wbs_datwr[8]
-+ io_wbs_datwr[9] io_wbs_rst io_wbs_stb io_wbs_we vccd1 vssd1 web_mem0 web_mem1 wmask_mem0[0]
-+ wmask_mem0[1] wmask_mem0[2] wmask_mem0[3] wmask_mem1[0] wmask_mem1[1] wmask_mem1[2]
-+ wmask_mem1[3]
++ io_wbs_datwr[9] io_wbs_rst io_wbs_sel[0] io_wbs_sel[1] io_wbs_sel[2] io_wbs_sel[3]
++ io_wbs_stb io_wbs_we vccd1 vssd1 web_mem0 web_mem1 wmask_mem0[0] wmask_mem0[1] wmask_mem0[2]
++ wmask_mem0[3] wmask_mem1[0] wmask_mem1[1] wmask_mem1[2] wmask_mem1[3]
 .ends
 
 .subckt user_project_wrapper analog_io[0] analog_io[10] analog_io[11] analog_io[12]
@@ -463,8 +465,11 @@ Xwb_mux_inst wbs_ack_o wfg_top_inst/io_wbs_ack wb_mux_inst/io_wbs_ack_1 wbs_adr_
 + wb_mux_inst/io_wbs_datwr_1[30] wb_mux_inst/io_wbs_datwr_1[31] wb_mux_inst/io_wbs_datwr_1[3]
 + wb_mux_inst/io_wbs_datwr_1[4] wb_mux_inst/io_wbs_datwr_1[5] wb_mux_inst/io_wbs_datwr_1[6]
 + wb_mux_inst/io_wbs_datwr_1[7] wb_mux_inst/io_wbs_datwr_1[8] wb_mux_inst/io_wbs_datwr_1[9]
-+ wbs_stb_i wfg_top_inst/io_wbs_stb wb_mux_inst/io_wbs_stb_1 wbs_we_i wfg_top_inst/io_wbs_we
-+ wb_mux_inst/io_wbs_we_1 vccd1 vssd1 wb_mux
++ wbs_sel_i[0] wbs_sel_i[1] wbs_sel_i[2] wbs_sel_i[3] wb_mux_inst/io_wbs_sel_0[0]
++ wb_mux_inst/io_wbs_sel_0[1] wb_mux_inst/io_wbs_sel_0[2] wb_mux_inst/io_wbs_sel_0[3]
++ wb_mux_inst/io_wbs_sel_1[0] wb_mux_inst/io_wbs_sel_1[1] wb_mux_inst/io_wbs_sel_1[2]
++ wb_mux_inst/io_wbs_sel_1[3] wbs_stb_i wfg_top_inst/io_wbs_stb wb_mux_inst/io_wbs_stb_1
++ wbs_we_i wfg_top_inst/io_wbs_we wb_mux_inst/io_wbs_we_1 vccd1 vssd1 wb_mux
 Xsky130_sram_2kbyte_1rw1r_32x512_8_inst0 wb_memory_inst/din_mem0[0] wb_memory_inst/din_mem0[1]
 + wb_memory_inst/din_mem0[2] wb_memory_inst/din_mem0[3] wb_memory_inst/din_mem0[4]
 + wb_memory_inst/din_mem0[5] wb_memory_inst/din_mem0[6] wb_memory_inst/din_mem0[7]
@@ -628,10 +633,12 @@ Xwb_memory_inst wb_memory_inst/addr_mem0[0] wb_memory_inst/addr_mem0[1] wb_memor
 + wb_mux_inst/io_wbs_datwr_1[29] wb_mux_inst/io_wbs_datwr_1[2] wb_mux_inst/io_wbs_datwr_1[30]
 + wb_mux_inst/io_wbs_datwr_1[31] wb_mux_inst/io_wbs_datwr_1[3] wb_mux_inst/io_wbs_datwr_1[4]
 + wb_mux_inst/io_wbs_datwr_1[5] wb_mux_inst/io_wbs_datwr_1[6] wb_mux_inst/io_wbs_datwr_1[7]
-+ wb_mux_inst/io_wbs_datwr_1[8] wb_mux_inst/io_wbs_datwr_1[9] wb_rst_i wb_mux_inst/io_wbs_stb_1
-+ wb_mux_inst/io_wbs_we_1 vccd1 vssd1 wb_memory_inst/web_mem0 wb_memory_inst/web_mem1
-+ wb_memory_inst/wmask_mem0[0] wb_memory_inst/wmask_mem0[1] wb_memory_inst/wmask_mem0[2]
-+ wb_memory_inst/wmask_mem0[3] wb_memory_inst/wmask_mem1[0] wb_memory_inst/wmask_mem1[1]
-+ wb_memory_inst/wmask_mem1[2] wb_memory_inst/wmask_mem1[3] wb_memory
++ wb_mux_inst/io_wbs_datwr_1[8] wb_mux_inst/io_wbs_datwr_1[9] wb_rst_i wb_mux_inst/io_wbs_sel_1[0]
++ wb_mux_inst/io_wbs_sel_1[1] wb_mux_inst/io_wbs_sel_1[2] wb_mux_inst/io_wbs_sel_1[3]
++ wb_mux_inst/io_wbs_stb_1 wb_mux_inst/io_wbs_we_1 vccd1 vssd1 wb_memory_inst/web_mem0
++ wb_memory_inst/web_mem1 wb_memory_inst/wmask_mem0[0] wb_memory_inst/wmask_mem0[1]
++ wb_memory_inst/wmask_mem0[2] wb_memory_inst/wmask_mem0[3] wb_memory_inst/wmask_mem1[0]
++ wb_memory_inst/wmask_mem1[1] wb_memory_inst/wmask_mem1[2] wb_memory_inst/wmask_mem1[3]
++ wb_memory
 .ends
 

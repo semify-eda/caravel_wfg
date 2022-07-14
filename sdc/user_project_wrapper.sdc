@@ -1,6 +1,6 @@
 ###############################################################################
 # Created by write_sdc
-# Thu Jul  7 13:22:37 2022
+# Wed Jul 13 14:14:00 2022
 ###############################################################################
 current_design user_project_wrapper
 ###############################################################################
@@ -9,6 +9,7 @@ current_design user_project_wrapper
 create_clock -name user_clock2 -period 20.0000 [get_ports {user_clock2}]
 set_clock_transition 0.1500 [get_clocks {user_clock2}]
 set_clock_uncertainty 0.2500 user_clock2
+set_propagated_clock [get_clocks {user_clock2}]
 set_input_delay 4.0000 -clock [get_clocks {user_clock2}] -add_delay [get_ports {analog_io[0]}]
 set_input_delay 4.0000 -clock [get_clocks {user_clock2}] -add_delay [get_ports {analog_io[10]}]
 set_input_delay 4.0000 -clock [get_clocks {user_clock2}] -add_delay [get_ports {analog_io[11]}]

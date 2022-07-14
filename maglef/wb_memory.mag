@@ -1,7 +1,7 @@
 magic
 tech sky130A
 magscale 1 2
-timestamp 1657526176
+timestamp 1657619539
 << nwell >>
 rect 1066 66629 148894 67195
 rect 1066 65541 148894 66107
@@ -1165,7 +1165,7 @@ string FIXED_BBOX 0 0 150000 70000
 string LEFclass BLOCK
 string LEFview TRUE
 string GDS_END 3963838
-string GDS_FILE /home/leo/Dokumente/caravel_workspace_mpw7/caravel_wfg/openlane/wb_memory/runs/22_07_11_09_54/results/signoff/wb_memory.magic.gds
+string GDS_FILE /home/leo/Dokumente/caravel_workspace_mpw7/caravel_wfg/openlane/wb_memory/runs/22_07_12_11_50/results/signoff/wb_memory.magic.gds
 string GDS_START 182778
 << end >>
 

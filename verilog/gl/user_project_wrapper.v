@@ -524,6 +524,10 @@ module user_project_wrapper (user_clock2,
  wire \io_wbs_datwr_1[7] ;
  wire \io_wbs_datwr_1[8] ;
  wire \io_wbs_datwr_1[9] ;
+ wire \io_wbs_sel_1[0] ;
+ wire \io_wbs_sel_1[1] ;
+ wire \io_wbs_sel_1[2] ;
+ wire \io_wbs_sel_1[3] ;
  wire io_wbs_stb_0;
  wire io_wbs_stb_1;
  wire io_wbs_we_0;
@@ -1196,6 +1200,10 @@ module user_project_wrapper (user_clock2,
     \io_wbs_datwr_1[2] ,
     \io_wbs_datwr_1[1] ,
     \io_wbs_datwr_1[0] }),
+    .io_wbs_sel({\io_wbs_sel_1[3] ,
+    \io_wbs_sel_1[2] ,
+    \io_wbs_sel_1[1] ,
+    \io_wbs_sel_1[0] }),
     .wmask_mem0({\wmask0_mem0[3] ,
     \wmask0_mem0[2] ,
     \wmask0_mem0[1] ,
@@ -1505,7 +1513,19 @@ module user_project_wrapper (user_clock2,
     \io_wbs_datwr_1[3] ,
     \io_wbs_datwr_1[2] ,
     \io_wbs_datwr_1[1] ,
-    \io_wbs_datwr_1[0] }));
+    \io_wbs_datwr_1[0] }),
+    .io_wbs_sel({wbs_sel_i[3],
+    wbs_sel_i[2],
+    wbs_sel_i[1],
+    wbs_sel_i[0]}),
+    .io_wbs_sel_0({_NC1,
+    _NC2,
+    _NC3,
+    _NC4}),
+    .io_wbs_sel_1({\io_wbs_sel_1[3] ,
+    \io_wbs_sel_1[2] ,
+    \io_wbs_sel_1[1] ,
+    \io_wbs_sel_1[0] }));
  wfg_top wfg_top_inst (.csb1(csb1),
     .io_wbs_ack(io_wbs_ack_0),
     .io_wbs_clk(wb_clk_i),

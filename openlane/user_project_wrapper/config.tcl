@@ -32,6 +32,10 @@ set ::env(DESIGN_NAME) user_project_wrapper
 
 # User Configurations
 
+set verilog_root $script_dir/../../verilog/
+set lef_root $script_dir/../../lef/
+set gds_root $script_dir/../../gds/
+
 ## Source Verilog Files
 set ::env(VERILOG_FILES) "\
 	$::env(CARAVEL_ROOT)/verilog/rtl/defines.v \
@@ -46,11 +50,11 @@ set ::env(CLOCK_PERIOD) "20"
 ## Internal Macros
 ### Macro PDN Connections
 set ::env(FP_PDN_MACRO_HOOKS) "\
-	wfg_top_inst vccd1 vssd1 vccd1 vssd1 \
-	merge_memory_inst vccd1 vssd1 vccd1 vssd1 \
-	wb_mux_inst vccd1 vssd1 vccd1 vssd1 \
-	wb_memory_inst vccd1 vssd1 vccd1 vssd1 \
-	sky130_sram_2kbyte_1rw1r_32x512_8_inst0 vccd1 vssd1 vccd1 vssd1 \
+	wfg_top_inst                            vccd1 vssd1 vccd1 vssd1, \
+	merge_memory_inst                       vccd1 vssd1 vccd1 vssd1, \
+	wb_mux_inst                             vccd1 vssd1 vccd1 vssd1, \
+	wb_memory_inst                          vccd1 vssd1 vccd1 vssd1, \
+	sky130_sram_2kbyte_1rw1r_32x512_8_inst0 vccd1 vssd1 vccd1 vssd1, \
 	sky130_sram_2kbyte_1rw1r_32x512_8_inst1 vccd1 vssd1 vccd1 vssd1"
 
 # Don't use magic for DRC because of OpenRAM DRC
@@ -58,37 +62,44 @@ set ::env(MAGIC_DRC_USE_GDS) 0
 set ::env(RUN_MAGIC_DRC) 0
 set ::env(QUIT_ON_MAGIC_DRC) 0
 
+# Save some time
+set ::env(RUN_KLAYOUT_XOR) 0
+
 ### Macro Placement
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro.cfg
 
 ### Black-box verilog and views
 set ::env(VERILOG_FILES_BLACKBOX) "\
 	$::env(CARAVEL_ROOT)/verilog/rtl/defines.v \
-	$script_dir/../../verilog/rtl/wfg_top_blackbox.v \
-	$script_dir/../../verilog/rtl/merge_memory_blackbox.v \
-	$script_dir/../../verilog/rtl/wb_mux_blackbox.v \
-	$script_dir/../../verilog/rtl/wb_memory_blackbox.v \
+	$verilog_root/gl/wfg_top.v \
+	$verilog_root/gl/merge_memory.v \
+	$verilog_root/gl/wb_mux.v \
+	$verilog_root/gl/wb_memory.v \
 	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/sky130_sram_macros/verilog/sky130_sram_2kbyte_1rw1r_32x512_8.v"
 
 set ::env(EXTRA_LEFS) "\
-	$script_dir/../../lef/wfg_top.lef \
-	$script_dir/../../lef/merge_memory.lef \
-	$script_dir/../../lef/wb_mux.lef \
-	$script_dir/../../lef/wb_memory.lef \
+	$lef_root/wfg_top.lef \
+	$lef_root/merge_memory.lef \
+	$lef_root/wb_mux.lef \
+	$lef_root/wb_memory.lef \
 	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/sky130_sram_macros/lef/sky130_sram_2kbyte_1rw1r_32x512_8.lef"
 
 set ::env(EXTRA_GDS_FILES) "\
-	$script_dir/../../gds/wfg_top.gds \
-	$script_dir/../../gds/merge_memory.gds \
-	$script_dir/../../gds/wb_mux.gds \
-	$script_dir/../../gds/wb_memory.gds \
+	$gds_root/wfg_top.gds \
+	$gds_root/merge_memory.gds \
+	$gds_root/wb_mux.gds \
+	$gds_root/wb_memory.gds \
 	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/sky130_sram_macros/gds/sky130_sram_2kbyte_1rw1r_32x512_8.gds"
 
 set ::env(EXTRA_LIBS) "\
 	$::env(PDK_ROOT)/$::env(PDK)/libs.ref/sky130_sram_macros/lib/sky130_sram_2kbyte_1rw1r_32x512_8_TT_1p8V_25C.lib"
 
 # Routing
-set ::env(ROUTING_CORES) "6"
+if {[catch {exec nproc} result] == 0} {
+	set ::env(ROUTING_CORES) $result
+} else {
+	set ::env(ROUTING_CORES) 4
+}
 set ::env(RT_MAX_LAYER) {met4}
 
 # disable pdn check nodes becuase it hangs with multiple power domains.
