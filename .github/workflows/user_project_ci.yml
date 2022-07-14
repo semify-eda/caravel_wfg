@@ -142,24 +142,19 @@ jobs:
 
       - name: Harden using Openlane
         run: |
-          make user_proj_example
+          make wfg_top
+          make wb_mux
+          make wb_memory
+          make merge_memory
           make user_project_wrapper
 
-      - name: Run DV RTL tests
-        run: |
-          make verify-io_ports-rtl 
-          make verify-la_test1-rtl 
-          make verify-la_test2-rtl 
-          make verify-mprj_stimulus-rtl 
-          make verify-wb_port-rtl
+      #- name: Run DV RTL tests
+      #  run: |
+      #    make verify-wb_port_wfg-rtl
 
-      - name: Run DV GL tests
-        run: |
-          make verify-io_ports-gl 
-          make verify-la_test1-gl 
-          make verify-la_test2-gl 
-          make verify-mprj_stimulus-gl 
-          make verify-wb_port-gl
+      #- name: Run DV GL tests
+      #  run: |
+      #    make verify-wb_port_wfg-gl
 
   user_project_flow_sky130B:
     timeout-minutes: 720

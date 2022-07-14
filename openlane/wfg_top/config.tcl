@@ -25,6 +25,9 @@ set ::env(VERILOG_FILES) "\
 	$script_dir/../../verilog/rtl/wfg/wfg_core/rtl/wfg_core.sv \
 	$script_dir/../../verilog/rtl/wfg/wfg_core/rtl/wfg_core_top.sv \
 	$script_dir/../../verilog/rtl/wfg/wfg_core/rtl/wfg_core_wishbone_reg.sv \
+	$script_dir/../../verilog/rtl/wfg/wfg_subcore/rtl/wfg_subcore.sv \
+	$script_dir/../../verilog/rtl/wfg/wfg_subcore/rtl/wfg_subcore_top.sv \
+	$script_dir/../../verilog/rtl/wfg/wfg_subcore/rtl/wfg_subcore_wishbone_reg.sv \
 	$script_dir/../../verilog/rtl/wfg/wfg_interconnect/rtl/wfg_interconnect.sv \
 	$script_dir/../../verilog/rtl/wfg/wfg_interconnect/rtl/wfg_interconnect_top.sv \
 	$script_dir/../../verilog/rtl/wfg/wfg_interconnect/rtl/wfg_interconnect_wishbone_reg.sv \

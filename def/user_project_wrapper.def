@@ -8876,19 +8876,19 @@ NETS 1150 ;
       NEW met2 ( 413770 1490220 ) M2M3_PR
       NEW met1 ( 1141030 1210910 ) M1M2_PR ;
     - din0_mem1\[17\] ( wb_memory_inst din_mem1[17] ) ( sky130_sram_2kbyte_1rw1r_32x512_8_inst1 din0[17] ) + USE SIGNAL
-      + ROUTED met2 ( 1152300 1149540 0 ) ( 1152990 * )
+      + ROUTED met2 ( 1152300 1149540 0 ) ( 1152530 * )
       NEW met4 ( 414390 1497700 ) ( * 1500530 0 )
       NEW met4 ( 414390 1497700 ) ( 414460 * )
       NEW met4 ( 414460 1490900 ) ( * 1497700 )
       NEW met3 ( 414460 1489540 ) ( * 1490900 )
       NEW met3 ( 414460 1489540 ) ( 419750 * )
       NEW met2 ( 419750 1217710 ) ( * 1489540 )
-      NEW met2 ( 1152990 1149540 ) ( * 1217710 )
-      NEW met1 ( 419750 1217710 ) ( 1152990 * )
+      NEW met2 ( 1152530 1149540 ) ( * 1217710 )
+      NEW met1 ( 419750 1217710 ) ( 1152530 * )
       NEW met1 ( 419750 1217710 ) M1M2_PR
       NEW met3 ( 414460 1490900 ) M3M4_PR
       NEW met2 ( 419750 1489540 ) M2M3_PR
-      NEW met1 ( 1152990 1217710 ) M1M2_PR ;
+      NEW met1 ( 1152530 1217710 ) M1M2_PR ;
     - din0_mem1\[18\] ( wb_memory_inst din_mem1[18] ) ( sky130_sram_2kbyte_1rw1r_32x512_8_inst1 din0[18] ) + USE SIGNAL
       + ROUTED met2 ( 1159430 1149540 ) ( 1161500 * 0 )
       NEW met4 ( 419830 1497700 ) ( * 1500530 0 )
