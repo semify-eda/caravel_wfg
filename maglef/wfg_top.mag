@@ -1,7 +1,7 @@
 magic
-tech sky130A
+tech sky130B
 magscale 1 2
-timestamp 1657784571
+timestamp 1657807594
 << obsli1 >>
 rect 1104 2159 148856 107729
 << obsm1 >>
@@ -869,8 +869,8 @@ port 193 nsew signal output
 string FIXED_BBOX 0 0 150000 110000
 string LEFclass BLOCK
 string LEFview TRUE
-string GDS_END 37447378
-string GDS_FILE /home/leo/Dokumente/caravel_workspace_mpw7/caravel_wfg/openlane/wfg_top/runs/22_07_14_09_32/results/signoff/wfg_top.magic.gds
+string GDS_END 37457554
+string GDS_FILE /home/leo/Dokumente/caravel_workspace_mpw7/caravel_wfg/openlane/wfg_top/runs/22_07_14_15_56/results/signoff/wfg_top.magic.gds
 string GDS_START 1353422
 << end >>
 

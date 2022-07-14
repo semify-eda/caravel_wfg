@@ -1,4 +1,4 @@
-* NGSPICE file created from merge_memory.ext - technology: sky130A
+* NGSPICE file created from merge_memory.ext - technology: sky130B
 
 * Black-box entry subcircuit for sky130_fd_sc_hd__tapvpwrvgnd_1 abstract view
 .subckt sky130_fd_sc_hd__tapvpwrvgnd_1 VGND VPWR

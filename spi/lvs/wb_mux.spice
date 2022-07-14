@@ -1,4 +1,4 @@
-* NGSPICE file created from wb_mux.ext - technology: sky130A
+* NGSPICE file created from wb_mux.ext - technology: sky130B
 
 * Black-box entry subcircuit for sky130_fd_sc_hd__fill_1 abstract view
 .subckt sky130_fd_sc_hd__fill_1 VGND VNB VPB VPWR

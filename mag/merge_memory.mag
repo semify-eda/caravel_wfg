@@ -1,7 +1,7 @@
 magic
-tech sky130A
+tech sky130B
 magscale 1 2
-timestamp 1657783268
+timestamp 1657806672
 << viali >>
 rect 117881 37213 117915 37247
 rect 117329 37077 117363 37111
@@ -29866,7 +29866,7 @@ rect 111880 2144 111896 2208
 rect 111960 2144 111976 2208
 rect 112040 2144 112048 2208
 rect 111728 2128 112048 2144
-use sky130_fd_sc_hd__diode_2  ANTENNA__039__A pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__diode_2  ANTENNA__039__A pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform 1 0 105984 0 1 4352
 box -38 -48 222 592
@@ -30578,19 +30578,19 @@ use sky130_fd_sc_hd__diode_2  ANTENNA_output127_A
 timestamp 1649977179
 transform 1 0 117300 0 -1 19584
 box -38 -48 222 592
-use sky130_ef_sc_hd__decap_12  FILLER_0_3 pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_ef_sc_hd__decap_12  FILLER_0_3 pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform 1 0 1380 0 1 2176
 box -38 -48 1142 592
-use sky130_fd_sc_hd__decap_3  FILLER_0_15 pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__decap_3  FILLER_0_15 pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform 1 0 2484 0 1 2176
 box -38 -48 314 592
-use sky130_fd_sc_hd__decap_6  FILLER_0_22 pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__decap_6  FILLER_0_22 pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform 1 0 3128 0 1 2176
 box -38 -48 590 592
-use sky130_fd_sc_hd__decap_4  FILLER_0_29 pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__decap_4  FILLER_0_29 pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform 1 0 3772 0 1 2176
 box -38 -48 406 592
@@ -30602,7 +30602,7 @@ use sky130_fd_sc_hd__decap_4  FILLER_0_43
 timestamp 1649977179
 transform 1 0 5060 0 1 2176
 box -38 -48 406 592
-use sky130_fd_sc_hd__fill_1  FILLER_0_47 pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__fill_1  FILLER_0_47 pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform 1 0 5428 0 1 2176
 box -38 -48 130 592
@@ -30618,7 +30618,7 @@ use sky130_fd_sc_hd__decap_4  FILLER_0_67
 timestamp 1649977179
 transform 1 0 7268 0 1 2176
 box -38 -48 406 592
-use sky130_fd_sc_hd__decap_8  FILLER_0_73 pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__decap_8  FILLER_0_73 pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform 1 0 7820 0 1 2176
 box -38 -48 774 592
@@ -30770,7 +30770,7 @@ use sky130_fd_sc_hd__decap_8  FILLER_0_292
 timestamp 1649977179
 transform 1 0 27968 0 1 2176
 box -38 -48 774 592
-use sky130_fd_sc_hd__fill_2  FILLER_0_300 pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__fill_2  FILLER_0_300 pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform 1 0 28704 0 1 2176
 box -38 -48 222 592
@@ -67170,7 +67170,7 @@ use sky130_fd_sc_hd__decap_3  PHY_129
 timestamp 1649977179
 transform -1 0 118864 0 1 36992
 box -38 -48 314 592
-use sky130_fd_sc_hd__tapvpwrvgnd_1  TAP_130 pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__tapvpwrvgnd_1  TAP_130 pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform 1 0 3680 0 1 2176
 box -38 -48 130 592
@@ -73198,15 +73198,15 @@ use sky130_fd_sc_hd__tapvpwrvgnd_1  TAP_1636
 timestamp 1649977179
 transform 1 0 117024 0 1 36992
 box -38 -48 130 592
-use sky130_fd_sc_hd__dlymetal6s2s_1  _039_ pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__dlymetal6s2s_1  _039_ pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform -1 0 105984 0 -1 3264
 box -38 -48 958 592
-use sky130_fd_sc_hd__clkbuf_2  _040_ pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__clkbuf_2  _040_ pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform 1 0 105524 0 1 3264
 box -38 -48 406 592
-use sky130_fd_sc_hd__mux2_1  _041_ pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__mux2_1  _041_ pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform -1 0 106260 0 1 2176
 box -38 -48 866 592
@@ -73290,7 +73290,7 @@ use sky130_fd_sc_hd__dlymetal6s2s_1  _061_
 timestamp 1649977179
 transform 1 0 117116 0 -1 3264
 box -38 -48 958 592
-use sky130_fd_sc_hd__buf_2  _062_ pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__buf_2  _062_ pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform 1 0 101200 0 -1 3264
 box -38 -48 406 592
@@ -73518,7 +73518,7 @@ use sky130_fd_sc_hd__clkbuf_2  _118_
 timestamp 1649977179
 transform -1 0 72496 0 -1 3264
 box -38 -48 406 592
-use sky130_fd_sc_hd__clkbuf_1  _119_ pdks/sky130A/libs.ref/sky130_fd_sc_hd/mag
+use sky130_fd_sc_hd__clkbuf_1  _119_ pdks/sky130B/libs.ref/sky130_fd_sc_hd/mag
 timestamp 1649977179
 transform 1 0 62284 0 -1 3264
 box -38 -48 314 592
