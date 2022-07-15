@@ -31,7 +31,7 @@ set ::env(CLOCK_TREE_SYNTH) 0
 set ::env(CLOCK_PORT) ""
 
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 600 200"
+set ::env(DIE_AREA) "0 0 750 200"
 
 set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 

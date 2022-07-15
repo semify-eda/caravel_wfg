@@ -30,7 +30,7 @@ set ::env(CLOCK_PORT) "io_wbs_clk"
 set ::env(CLOCK_PERIOD) "20"
 
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 750 350"
+set ::env(DIE_AREA) "0 0 750 200"
 
 set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
 
