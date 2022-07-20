@@ -4,9 +4,9 @@
 
 # Waveform Generator
 
-![Integrated into the Caravel Harness](img/caravel_07_07_small.png)
-
 The source files for the Waveform Generator can be found under the [waveform-generator](https://github.com/semify-eda/waveform-generator) repository.
+
+![The completed GSD file](img/caravel_wfg.png)
 
 The general idea is that various stimuli can be arbitrarily connected to different driver.
 
