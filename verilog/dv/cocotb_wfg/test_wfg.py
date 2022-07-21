@@ -47,8 +47,10 @@ class SimpleSpiSlave(SpiSlaveBase):
 
 @cocotb.test()
 async def test_wfg(dut):
-    clock = Clock(dut.my_clock, 25, units="ns")
+    clock = Clock(dut.clock, 25, units="ns")
     cocotb.fork(clock.start())
+
+    dut._log.info("Starting simulation")
 
     dut.RSTB.value = 0
     dut.power1.value = 0;
@@ -56,20 +58,21 @@ async def test_wfg(dut):
     dut.power3.value = 0;
     dut.power4.value = 0;
 
-    await ClockCycles(dut.my_clock, 8)
+    dut._log.info("Power sequencing")
+
+    await ClockCycles(dut.clock, 8)
     dut.power1.value = 1;
-    await ClockCycles(dut.my_clock, 8)
+    await ClockCycles(dut.clock, 8)
     dut.power2.value = 1;
-    await ClockCycles(dut.my_clock, 8)
+    await ClockCycles(dut.clock, 8)
     dut.power3.value = 1;
-    await ClockCycles(dut.my_clock, 8)
+    await ClockCycles(dut.clock, 8)
     dut.power4.value = 1;
 
-    await ClockCycles(dut.my_clock, 80)
+    await ClockCycles(dut.clock, 80)
     dut.RSTB.value = 1
 
-    # wait with a timeout for the project to become active
-    # await with_timeout(RisingEdge(dut.clk), 500, 'us')
+    dut._log.info("Reset off")
 
     # SPI settings
     dff = 3
@@ -98,14 +101,19 @@ async def test_wfg(dut):
         frame_spacing_ns    = 1                         # the spacing between frames that the master waits for or the slave obeys
                                                         #       the slave should raise SpiFrameError if this is not obeyed.
     )
+
+    await ClockCycles(dut.clock, 30000)
     
-
-
-    # wait
-    await ClockCycles(dut.my_clock, 30000)
+    dut._log.info("Waiting for falling CS")
+    
     spi_slave = SimpleSpiSlave(dut, spi_signals, spi_config)
-    await ClockCycles(dut.my_clock, 30000)
-    await ClockCycles(dut.my_clock, 30000)
+    
+    await FallingEdge(dut.cs)
+    
+    dut._log.info("Received falling CS")
+    
+    await ClockCycles(dut.clock, 30000)
+    await ClockCycles(dut.clock, 30000)
 
     # assert something
     assert(0 == 0)

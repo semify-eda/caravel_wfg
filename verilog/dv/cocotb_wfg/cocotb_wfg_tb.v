@@ -17,19 +17,24 @@
 
 `timescale 1 ns / 1 ps
 
-module cocotb_wfg_tb;
-	reg my_clock;
-	reg RSTB;
-	reg CSB;
-	reg power1, power2;
-	reg power3, power4;
+module cocotb_wfg_tb (
+	input clock,
+	input RSTB,
 
-	wire gpio;
-	wire [37:0] mprj_io;
-	wire [7:0] mprj_io_0;
+	input power1,
+	input power2,
+	input power3,
+	input power4,
+
+	inout [37:0] mprj_io,
 	
-	wire sclk, cs, sdo;
-	reg sdi;
+	output sclk,
+	output cs,
+	output sdo,
+	input sdi
+);
+	reg CSB;
+	wire gpio;
 
 	assign sclk = mprj_io[8];
 	assign cs   = mprj_io[9];
@@ -37,25 +42,9 @@ module cocotb_wfg_tb;
 
 	assign mprj_io[3] = 1'b1;
 
-	// External clock is used by default.  Make this artificially fast for the
-	// simulation.  Normally this would be a slow clock and the digital PLL
-	// would be the fast clock.
-
-	initial begin
-		my_clock = 1'b0;
-	end
-
-	always #12.5 my_clock <= !my_clock;
-
-    wire clock;
-    
-    assign clock = my_clock;
-
 	initial begin
 		$dumpfile("cocotb_wfg_tb.vcd");
 		$dumpvars(0, cocotb_wfg_tb);
-		#1;
-		$display("%d", sdi); // TODO here to keep sdi
 	end  
 
 	wire flash_csb;

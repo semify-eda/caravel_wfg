@@ -1,6 +1,6 @@
 <testsuites name="results">
   <testsuite name="all" package="all">
-    <property name="random_seed" value="1655193047" />
-    <testcase name="test_wfg" classname="test_wfg" file="/home/leo/Dokumente/caravel_workspace/caravel_wfg/verilog/dv/cocotb_wfg/test_wfg.py" lineno="48" time="94.87132024765015" sim_time_ns="2252775.001" ratio_time="23745.5850210517" />
+    <property name="random_seed" value="1658398750" />
+    <testcase name="test_wfg" classname="test_wfg" file="/home/leo/Dokumente/caravel_workspace_mpw7/caravel_wfg/verilog/dv/cocotb_wfg/test_wfg.py" lineno="48" time="848.0740084648132" sim_time_ns="8903925.001" ratio_time="10498.995267073353" />
   </testsuite>
 </testsuites>

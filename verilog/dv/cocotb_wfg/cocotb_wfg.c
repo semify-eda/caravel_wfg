@@ -50,16 +50,30 @@ void main()
     reg_spi_enable = 1;
     reg_wb_enable = 1;
 
+    // SPI
     reg_mprj_io_8  = GPIO_MODE_USER_STD_OUTPUT;
     reg_mprj_io_9  = GPIO_MODE_USER_STD_OUTPUT;
     reg_mprj_io_10 = GPIO_MODE_USER_STD_OUTPUT;
+    
+    // Pattern
+    reg_mprj_io_11 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_12 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_13 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_14 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_15 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_16 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_17 = GPIO_MODE_USER_STD_OUTPUT;
+    reg_mprj_io_18 = GPIO_MODE_USER_STD_OUTPUT;
 
      /* Apply configuration */
     reg_mprj_xfer = 1;
     while (reg_mprj_xfer == 1);
 
-    int sync_count = 16;
-    int subcycle_count = 16;
+    int core_sync_count = 16;
+    int core_subcycle_count = 16;
+    
+    int subcore_sync_count = 32;
+    int subcore_subcycle_count = 16;
     
     int cnt = 3;
     int cpol = 0;
@@ -67,20 +81,80 @@ void main()
     int dff = 3;
     int sspol = 0;
 
+    int core_sel_spi = 0;
+    int core_sel_pat = 1;
+    
+    int pattern_start = 0x0;
+    int pattern_end = 0xF;
+    
+    int mem_start = 0x000;
+    int mem_end = 0x00F;
+    int mem_inc = 0x2;
+    int mem_gain = 0x0001;
 
     //*((volatile uint32_t*)0x30000000) = 0xDEADBEEF;
 
+    // Write to memory
+    for (int i=0; i<0xF; i++)
+    {
+        *(((volatile uint8_t*)0x30001000) + i) = i;
+    }
+    
+    *(((volatile uint32_t*)0x30001000) + 4) = 0x00000000;
+    *(((volatile uint32_t*)0x30001000) + 5) = 0x00000001;
+    *(((volatile uint32_t*)0x30001000) + 6) = 0x00000004;
+    *(((volatile uint32_t*)0x30001000) + 7) = 0x0000000C;
+    *(((volatile uint32_t*)0x30001000) + 8) = 0x00000012;
+    *(((volatile uint32_t*)0x30001000) + 9) = 0x00000024;
+    *(((volatile uint32_t*)0x30001000) + 10) = 0x0000004F;
+    *(((volatile uint32_t*)0x30001000) + 11) = 0x0000006A;
+    *(((volatile uint32_t*)0x30001000) + 12) = 0x00000085;
+    *(((volatile uint32_t*)0x30001000) + 13) = 0x000000A0;
+    *(((volatile uint32_t*)0x30001000) + 14) = 0x000000BD;
+    *(((volatile uint32_t*)0x30001000) + 15) = 0x000000FF;
+    
+    for (int i=0; i<0xF; i++)
+    {
+        *(((volatile uint32_t*)0x30001000) + 510 + i) = *(((volatile uint32_t*)0x30001000) + (i % 4));
+    }
+    
+    for (int i=0; i<0xF; i++)
+    {
+        *(((volatile uint32_t*)0x30001000) + i + 0xFF) = *(((volatile uint32_t*)0x30001000) + 512 + i);
+    }
+
     // Core
-    wfg_set_register(0x1, 0x4, (sync_count << 0) | (subcycle_count << 8));
+    wfg_set_register(0x1, 0x4, (core_sync_count << 0) | (core_subcycle_count << 8));
     wfg_set_register(0x1, 0x0, 1); // Enable
     
-    // Sine
+    // Subcore
+    wfg_set_register(0x2, 0x4, (subcore_sync_count << 0) | (subcore_subcycle_count << 8));
     wfg_set_register(0x2, 0x0, 1); // Enable
+    
+    // Interconnect
+    wfg_set_register(0x3, 0x4, 0); // Driver0
+    wfg_set_register(0x3, 0x8, 1); // Driver1
+    wfg_set_register(0x3, 0x0, 1); // Enable
+    
+    // Sine
+    wfg_set_register(0x4, 0x0, 1); // Enable
+    
+    // Mem
+    wfg_set_register(0x5, 0x4, mem_start); // Start
+    wfg_set_register(0x5, 0x8, mem_end); // End
+    wfg_set_register(0x5, 0xC, mem_gain<<8 | mem_inc); // Configuration
+    wfg_set_register(0x5, 0x0, 1); // Enable
 
     // SPI
-    wfg_set_register(0x3, 0x8, cnt); // Clock divider
-    wfg_set_register(0x3, 0x4, (cpol<<0) | (lsbfirst<<1) | (dff<<2) | (sspol<<4));
-    wfg_set_register(0x3, 0x0, 1); // Enable SPI
+    wfg_set_register(0x6, 0x8, cnt); // Clock divider
+    wfg_set_register(0x6, 0x4, (cpol<<0) | (lsbfirst<<1) | (dff<<2) | (sspol<<4) | (core_sel_spi<<5));
+    wfg_set_register(0x6, 0x0, 1); // Enable SPI
+    
+    // Pattern
+    wfg_set_register(0x7, 0x4, (pattern_start) | (pattern_end<<8) | (core_sel_pat<<16) ); // Start:End
+    wfg_set_register(0x7, 0x8, 0xFFFFFFFF); // Low bit
+    wfg_set_register(0x7, 0xC, 0xFFFFFFFF); // High bit
+    wfg_set_register(0x7, 0x0, 0xFFFFFFFF); // Enable all bits
 }
 
 volatile uint8_t test = 0;
@@ -90,9 +164,7 @@ volatile uint8_t test = 0;
 Write to a register of the waveform generator
 
 peripheral:
- - core         - 0x01
- - stim_sine    - 0x02
- - drive_spi    - 0x03
+The address of the peripheral, can be 0-15
 
 address:
 The address of the register, can be 0-15
